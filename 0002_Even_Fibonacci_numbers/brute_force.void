@@ -1,0 +1,84 @@
+{   v_import("imports.void");
+
+    v_import("checktime.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+num_t = int(128);
+
+
+//---------------------------------------------------------------------
+brute_force: (N: num_t) -> num_t
+{
+    sum: &num_t := 0;
+
+    i0: &num_t := 1;
+    i1: &num_t := 1;
+
+    loop
+    {
+        i = i0 + i1;
+
+        if (i >= N) v_break();
+
+        if (i%2 == 0)
+        {
+            sum += i;
+
+//          printf("i: %lld, sum: %lld\n", (i: long_long), (sum: long_long));
+        }
+
+        i0 := i1;
+        i1 := i;
+    }
+
+    v_return(sum);
+}
+
+
+//---------------------------------------------------------------------
+N: &num_t := v_undef();
+R: &num_t := v_undef();
+
+doit: () -> void
+{
+    R := brute_force(N);
+}
+
+
+//---------------------------------------------------------------------
+{
+    NC = 1000000;
+
+
+    t0 = checktime(donothing, NC);
+
+    printf("t0: %g\n", t0);
+
+    fflush(stdout);
+
+
+    N := 4000000;
+
+    loop
+    {
+        if (N > (4000000: num_t)*1000*1000*100) v_break();
+
+        t = checktime(doit, NC);
+
+        printf("N: %lld, R: %lld, t: %g, (t-t0): %g\n", (N: long_long), (R: long_long), t, t-t0);
+
+        fflush(stdout);
+
+        N *= 10;
+    }
+}
+
+
+
+
+
+

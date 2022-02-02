@@ -1,0 +1,239 @@
+{   v_import("imports.void");
+
+    v_import("checktime.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+num_t = int(128);
+
+numSr5_t = vec(num_t, 2);
+
+
+//---------------------------------------------------------------------
+mulSr5: (a: numSr5_t, b: numSr5_t) -> numSr5_t
+{
+    ret: &numSr5_t := v_undef();
+
+    ret[0] := a[0]*b[0] + 5*a[1]*b[1];
+
+    ret[1] := a[0]*b[1] +   a[1]*b[0];
+
+    v_return(ret);
+}
+
+divSr5: (a: numSr5_t, b: numSr5_t) -> numSr5_t
+{
+    b_: &numSr5_t := v_undef();
+
+    b_[0] :=  b[0];
+    b_[1] := -b[1];
+
+    num = mulSr5(a, b_);
+
+    den = b[0]*b[0] - 5*b[1]*b[1];
+
+    num = num / den;        //- Sic!
+
+    v_return(num);
+}
+
+
+//---------------------------------------------------------------------
+oneSr5: &numSr5_t := v_undef();
+
+dphiSr5: &numSr5_t := v_undef();
+dpsiSr5: &numSr5_t := v_undef();
+
+{   oneSr5[0] := 1;
+    oneSr5[1] := 0;
+
+    dphiSr5[0] :=  1;
+    dphiSr5[1] :=  1;
+
+    dpsiSr5[0] :=  1;
+    dpsiSr5[1] := -1;
+}
+
+
+//---------------------------------------------------------------------
+powSr5: (a: numSr5_t, n: unsigned) -> numSr5_t
+{
+    if (n == 0) v_return(oneSr5);
+    if (n == 1) v_return(a);
+
+    ret: &numSr5_t := powSr5(a, n/2);
+
+    ret := mulSr5(ret, ret);
+
+    if (n & 1)  ret := mulSr5(ret, a);
+
+    v_return(ret);
+}
+
+
+//---------------------------------------------------------------------
+//fib: (n: unsigned) -> num_t
+//{
+//    ph_n = powSr5(dphiSr5, n);
+//    ps_n = powSr5(dpsiSr5, n);
+//
+//    r = ph_n - ps_n;
+//
+//    ret = r[1] / ((1 : num_t) << n);
+//
+//    v_return(ret);
+//}
+//
+//{   i: &unsigned := 0;
+//
+//    loop
+//    {
+//        F_i = fib(i);
+//
+//        if ((F_i & 1) == 0)
+//        {
+//            printf("fib(%d): %llu\n", i, (F_i : long_long));
+//        }
+//
+//        if (F_i >= (4000000: num_t)*1000) v_break();
+//
+//        ++i;
+//    }
+//}
+
+
+//---------------------------------------------------------------------
+sumGpSr5: (qn: numSr5_t, qd: num_t, n: unsigned) -> numSr5_t
+{
+    num = powSr5(qn, n+1) - oneSr5*(qd << (n+1));
+
+    den = qn - oneSr5*qd;
+
+    ret = divSr5(num, den);
+
+    v_return(ret);
+}
+
+//{   dphiSr5_3 = powSr5(dphiSr5, 3);
+//    dpsiSr5_3 = powSr5(dpsiSr5, 3);
+//
+//    i: &unsigned := 0;
+//
+//    loop
+//    {
+//        if (i > 15) v_break();
+//
+//        Sdphi_i = sumGpSr5(dphiSr5_3, 1<<3, i);
+//        Sdpsi_i = sumGpSr5(dpsiSr5_3, 1<<3, i);
+//
+//        r = Sdphi_i - Sdpsi_i;
+//
+//        r = r[1] / ((1 : num_t) << 3*i);
+//
+//        printf("sum(%d): %lld\n", i, (r : long_long));
+//
+//        ++i;
+//    }
+//}
+
+
+//---------------------------------------------------------------------
+double = float(64);
+
+sqrt: (double) -> double;
+
+log: (double) -> double;
+
+//{
+//    phi = (1 + sqrt(5)) / 2;
+//
+//    N = (4000000: num_t)*1000;
+//
+//    h = (1:double) / 2;
+//
+//    p = log(N*sqrt(5) + h) / log(phi);
+//
+//    printf("p: %g\n", p);
+//}
+
+
+
+//---------------------------------------------------------------------
+Sr5: &double := v_undef();
+phi: &double := v_undef();
+
+h: &double := v_undef();
+
+log_phi: &double := v_undef();
+
+{   Sr5 := sqrt(5);
+
+    phi := (1 + Sr5) / 2;
+
+    h := (1:double) / 2;
+
+    log_phi := log(phi);
+}
+
+O_one: (N: num_t) -> num_t
+{
+    P = log(N*Sr5 + h) / log_phi;
+
+    P3 = (P: unsigned) / 3;
+
+    dphiSr5_3 = powSr5(dphiSr5, 3);
+    dpsiSr5_3 = powSr5(dpsiSr5, 3);
+
+    Sdphi_P3 = sumGpSr5(dphiSr5_3, 1<<3, P3);
+    Sdpsi_P3 = sumGpSr5(dpsiSr5_3, 1<<3, P3);
+
+    r = Sdphi_P3 - Sdpsi_P3;
+
+    r = (r[1] : uint(128)) >> 3*P3;
+
+    v_return(r);
+}
+
+
+//---------------------------------------------------------------------
+N: &num_t := v_undef();
+R: &num_t := v_undef();
+
+doit: () -> void
+{
+    R := O_one(N);
+}
+
+
+//---------------------------------------------------------------------
+{
+    NC = 1000000;
+
+
+    t0 = checktime(donothing, NC);
+
+    printf("t0: %g\n", t0);
+
+    fflush(stdout);
+
+
+    N := 4000000;
+
+    loop
+    {
+        if (N > (4000000: num_t)*1000*1000*100) v_break();
+
+        t = checktime(doit, NC);
+
+        printf("N: %lld, R: %lld, t: %g, (t-t0): %g\n", (N: long_long), (R: long_long), t, t-t0);
+
+        fflush(stdout);
+
+        N *= 10;
+    }
+}
+
+

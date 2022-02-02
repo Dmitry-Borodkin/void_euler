@@ -1,0 +1,98 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+S = 10000;
+
+sieve: &bool[S] := 0;
+
+{   i: &int := 1;
+
+    loop
+    {
+        if (i >= S) v_break();
+
+        sieve[i] := true;
+
+        i += 2;
+    }
+
+    sieve[2] := true;
+
+    i := 3;
+
+    k: &int := v_undef();
+
+    loop
+    {
+        if (i >= S) v_break();
+
+        if (sieve[i])
+        {
+            k := 2*i;
+
+            loop
+            {
+                if (k >= S) v_break();
+
+                sieve[k] := false;
+
+                k += i;
+            }
+        }
+
+        ++i;
+    }
+}
+
+
+//---------------------------------------------------------------------
+{
+    N: &uint64_t := 600851475143;
+
+    printf("N: %lld\n", (N: long_long));
+
+    p: &unsigned := 3;
+
+    loop
+    {
+        if (sieve[p]  &&  N%p == 0)
+        {
+//          printf("%u", p);
+
+            loop
+            {
+                N /= p;
+
+                if (N%p != 0) v_break();
+                if (N == p)   v_break();        //- Sic!
+
+//              printf("*%u", p);
+            }
+
+//          printf("\n");
+        }
+
+        if (p == N  ||  p*p > N)
+        {
+            printf("Found: %d\n", (N: int));
+
+            v_break();
+        }
+
+        p += 2;
+
+        if (p >= S)
+        {
+            printf("Yet not found...\n");
+
+            v_break();
+        }
+    }
+}
+
+
+

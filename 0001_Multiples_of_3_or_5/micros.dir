@@ -1,0 +1,10 @@
+              ****  001 Multiples of 3 or 5  ****              │
+                                                               │
+Brute force                                                    │brute_force.void
+                                                               │
+O(1)                                                           │O_one.void
+                                                               │
+                                                               │
+───────────────────────────────────────────────────────────────│
+void.doit                                                      │void.doit
+                                                               │

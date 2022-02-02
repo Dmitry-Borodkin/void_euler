@@ -1,0 +1,42 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+//N = 40;
+N = 1000;
+
+{   a: &int := 1;
+    b: &int := v_undef();
+
+    loop
+    {
+        if (a >= N) v_break();
+
+        b := a + 1;
+
+        loop
+        {
+            if (b >= N) v_break();
+
+            c = N - (a + b);
+
+            if (c <= 0) v_break();
+
+            if (a*a + b*b == c*c)
+            {
+                printf("a: %d, b: %d, c: %d\n", a, b, c);
+
+                printf("abc: %d\n", a*b*c);
+            }
+
+            ++b;
+        }
+
+        ++a;
+    }
+}
+
+

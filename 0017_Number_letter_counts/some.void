@@ -1,0 +1,171 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+print_10: (n: int) -> int
+{
+    r: &int := v_undef();
+
+    s: & *const char := v_undef();
+
+    switch(n)
+    {
+    case 0:                         v_return(0);
+    case 1: r := 3; s := "one";     v_break();
+    case 2: r := 3; s := "two";     v_break();
+    case 3: r := 5; s := "three";   v_break();
+    case 4: r := 4; s := "four";    v_break();
+    case 5: r := 4; s := "five";    v_break();
+    case 6: r := 3; s := "six";     v_break();
+    case 7: r := 5; s := "seven";   v_break();
+    case 8: r := 5; s := "eight";   v_break();
+    case 9: r := 4; s := "nine";    v_break();
+    }
+
+    printf(s);
+
+    v_return(r);
+}
+
+print_20: (n: int) -> int
+{
+    if (0 < n < 10)
+    {
+        r = print_10(n);
+
+        v_return(r);
+    }
+
+    r: &int := v_undef();
+
+    s: & *const char := v_undef();
+
+    switch(n)
+    {
+    case 10: r := 3; s := "ten";        v_break();
+    case 11: r := 6; s := "eleven";     v_break();
+    case 12: r := 6; s := "twelve";     v_break();
+    case 13: r := 8; s := "thirteen";   v_break();
+    case 14: r := 8; s := "fourteen";   v_break();
+    case 15: r := 7; s := "fifteen";    v_break();
+    case 16: r := 7; s := "sixteen";    v_break();
+    case 17: r := 9; s := "seventeen";  v_break();
+    case 18: r := 8; s := "eighteen";   v_break();
+    case 19: r := 8; s := "nineteen";   v_break();
+    }
+
+    printf(s);
+
+    v_return(r);
+}
+
+print_100: (n: int) -> int
+{
+    if (0 < n < 20)
+    {
+        r = print_20(n);
+
+        v_return(r);
+    }
+
+    d1 = n / 10;
+
+    r: &int := v_undef();
+
+    s: & *const char := v_undef();
+
+    switch(d1)
+    {
+    case 2: r := 6; s := "twenty";  v_break();
+    case 3: r := 6; s := "thirty";  v_break();
+    case 4: r := 5; s := "forty";   v_break();
+    case 5: r := 5; s := "fifty";   v_break();
+    case 6: r := 5; s := "sixty";   v_break();
+    case 7: r := 7; s := "seventy"; v_break();
+    case 8: r := 6; s := "eighty";  v_break();
+    case 9: r := 6; s := "ninety";  v_break();
+    }
+
+    printf(s);
+
+    d0 = n % 10;
+
+    if (d0 == 0)  v_return(r);
+
+    printf("-");
+
+    r += print_10(d0);
+
+    v_return(r);
+}
+
+print_1000: (n: int) -> int
+{
+    if (0 < n < 100)
+    {
+        r = print_100(n);
+
+        v_return(r);
+    }
+
+    d2 = n / 100;
+
+    r: &int := print_10(d2) + 7;
+
+    printf(" hunderd");
+
+    d10 = n % 100;
+
+    if (d10 == 0)  v_return(r);
+
+    printf(" and ");
+
+    r += 3 + print_100(d10);
+
+    v_return(r);
+}
+
+
+//---------------------------------------------------------------------
+print_numeral: (n: int) -> int
+{
+    if (!(0 < n <= 1000))
+    {
+        printf("Wrong input: %d\n", n);
+
+        v_return(-999999999);
+    }
+
+    r: &int := 3 + 8;
+
+    if (n == 1000)  printf("one thousand");
+    else            r := print_1000(n);
+
+    printf("\n");
+
+    v_return(r);
+}
+
+
+//---------------------------------------------------------------------
+{
+    r: &int := 0;
+
+    n: &int := 1;
+
+    loop
+    {
+        if (n > 1000) v_break();
+
+        r += print_numeral(n);
+
+        ++n;
+    }
+
+    printf("\n%d\n", r);
+}
+
+

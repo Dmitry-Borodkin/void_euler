@@ -1,0 +1,38 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+{
+    N = 20;
+
+    D: &long[N+1] := 0;
+
+    D[0] := 1;
+
+    i: &int := 0;
+
+    loop
+    {
+        if (i > N) v_break();
+
+        j: &int := 1;
+
+        loop
+        {
+            if (j > N) v_break();
+
+            D[j] := D[j-1] + D[j];
+
+            ++j;
+        }
+
+        ++i;
+    }
+
+    printf("%ld\n", D[N]);
+}
+
+

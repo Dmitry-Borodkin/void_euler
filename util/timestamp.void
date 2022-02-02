@@ -1,0 +1,86 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+{   buflen = 1024;
+
+    buffer = v_malloc(char, buflen);
+
+    {   p = popen("mktemp", "r");
+        defer pclose(p);
+
+        fscanf(p, "%500s", buffer);
+    }
+
+    if (v_find_constant("_WIN32", 0, 0))
+    {
+        cmd = buffer + 512;
+
+        sprintf(cmd, "cygpath -m %s", buffer);
+
+        p = popen(cmd, "r");
+        defer pclose(p);
+
+        fscanf(p, "%1000s", buffer);
+    }
+
+    //-----------------------------------------------------------------
+    {   p = popen("bash", "w");
+        defer pclose(p);
+
+        fprintf(p, "clang -x c - -O3 -c -o %s <<HEREDOC\n", buffer);
+
+        fputs(
+            """
+            #include <time.h>
+
+            double my_timestamp(void)
+            {
+                struct timespec rawtime;
+                struct tm * timeinfo;
+                double ret;
+
+                clock_gettime(CLOCK_REALTIME, &rawtime);
+                timeinfo = localtime(&rawtime.tv_sec);
+
+                ret = timeinfo->tm_hour;
+                ret = 60*ret + timeinfo->tm_min;
+                ret = 60*ret + timeinfo->tm_sec;
+                ret += rawtime.tv_nsec * 1e-9;
+
+                return ret;
+            }
+
+            """, p);
+
+        fputs("\nHEREDOC\n", p);
+    }
+
+    //-----------------------------------------------------------------
+    mb: &LLVMMemoryBufferRef := 0;
+
+    LLVMCreateMemoryBufferWithContentsOfFile(buffer, &mb, 0);
+
+    voidc_unit_load_object_file_to_jit(mb);
+    voidc_add_object_file_to_jit(mb);
+
+    LLVMDisposeMemoryBuffer(mb);
+
+    //-----------------------------------------------------------------
+    p = popen("bash", "w");
+    defer pclose(p);
+
+    fprintf(p, "rm %s\n", buffer);
+
+    v_mfree(buffer);
+}
+
+
+//---------------------------------------------------------------------
+export
+my_timestamp: () -> float(64);
+
+

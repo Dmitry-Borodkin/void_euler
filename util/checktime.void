@@ -1,0 +1,43 @@
+{   v_import("imports.void");
+
+    v_import("timestamp.void");
+}
+
+{   enable_imports(); }
+
+
+//=====================================================================
+{   voidc_unit_begin_module("checktime_module"); }
+
+
+//---------------------------------------------------------------------
+export
+checktime: (f: *()->void, n: int) -> float(64)
+{
+    i: &int := 0;
+
+    t0 = my_timestamp();
+
+    loop
+    {
+        if (i >= n) v_break();
+
+        f();
+
+        ++i;
+    }
+
+    t1 = my_timestamp();
+
+    v_return((t1 - t0) / n);
+}
+
+//---------------------------------------------------------------------
+export
+donothing: () -> void {}
+
+
+//---------------------------------------------------------------------
+{   voidc_unit_end_module(); }
+
+

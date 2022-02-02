@@ -1,0 +1,170 @@
+{   v_export_import("level-00");
+    v_export_import("level-01");
+
+    v_export_import("llvm-c/Core.void");
+}
+
+{   v_export_import("printf.void");
+}
+
+//---------------------------------------------------------------------
+{   v_enable_level_01();
+}
+
+{   v_set_export_flag(true); }
+
+
+//=====================================================================
+{   module = LLVMModuleCreateWithName("imports_module_N1");
+
+    v_set_module(module);
+
+    //-----------------------------------------------------------------
+    LLVMDisposeMemoryBuffer(voidc_get_unit_buffer());
+    voidc_set_unit_buffer(0);
+}
+
+//---------------------------------------------------------------------
+voidc_unit_begin_module: (name: *const char) -> LLVMModuleRef
+{
+    module = LLVMModuleCreateWithName(name);
+
+    v_set_module(module);
+
+    LLVMDisposeMemoryBuffer(voidc_get_unit_buffer());
+    voidc_set_unit_buffer(0);
+
+    v_return(module);
+}
+
+//---------------------------------------------------------------------
+voidc_unit_end_module: () -> void
+{
+    module = v_get_module();
+
+    voidc_unit_load_module_to_jit(module);
+    voidc_add_module_to_jit(module);
+
+    LLVMDisposeModule(module);
+    v_set_module(0);
+}
+
+
+//---------------------------------------------------------------------
+{
+    module = v_get_module();
+
+    //-----------------------------------------------------------------
+//  v_debug_print_module(1);
+
+    voidc_unit_load_module_to_jit(module);
+    voidc_add_module_to_jit(module);
+
+    LLVMDisposeModule(module);
+    v_set_module(0);
+}
+
+
+//=====================================================================
+{   voidc_unit_begin_module("imports_module_N2"); }
+
+//---------------------------------------------------------------------
+enable_imports: () -> void
+{
+    v_enable_level_01();
+
+    if (!voidc_has_grammar()) v_return();       //- Sic!
+
+    gr0 = v_alloca(v_peg_opaque_grammar_sptr);
+    v_initialize(gr0);
+    defer v_terminate(gr0);
+
+    v_peg_get_grammar(gr0);
+
+    grammar gr0
+    {
+    parsers:
+        string += "\"\"\"" <(!"\"\"\"" .)*> "\"\"\"" { $1 };
+    }
+
+    v_peg_set_grammar(gr0);
+}
+
+
+//---------------------------------------------------------------------
+{   FILE = v_struct_type_named("FILE");
+
+    v_export_type("FILE", FILE);
+
+    FILE_ptr = v_pointer_type(FILE, 0);
+
+    typ = v_alloca(v_type_ptr, 2);
+
+    char_ptr = v_pointer_type(char, 0);
+
+    typ[0] := char_ptr;
+    typ[1] := char_ptr;
+
+    popen_ft = v_function_type(FILE_ptr, typ, 2, false);
+
+    typ[0] := FILE_ptr;
+
+    pclose_ft = v_function_type(int, typ, 1, false);
+
+    if (v_find_constant("_WIN32", 0, 0))
+    {
+        v_export_symbol("_popen",  popen_ft,  0);
+        v_export_symbol("_pclose", pclose_ft, 0);
+
+        v_export_alias("popen",  "_popen");
+        v_export_alias("pclose", "_pclose");
+    }
+    else
+    {
+        v_export_symbol("popen",  popen_ft,  0);
+        v_export_symbol("pclose", pclose_ft, 0);
+    }
+}
+
+v_fopen: (filename: *const char, mode: *const char) -> *FILE;       //- Sic!
+
+fwrite: (buf: *const void, size: size_t, count: size_t, stream: *FILE) -> size_t;
+
+fclose: (stream: *FILE) -> int;
+
+fflush: (*FILE) -> int;
+
+stdout: &*FILE;
+stderr: &*FILE;
+
+
+//---------------------------------------------------------------------
+fputs: (buf: *const char, stream: *FILE) -> int;
+
+fprintf: (stream: *FILE, format: *const char, ...) -> int;
+
+sprintf: (str: *char, format: *const char, ...) -> int;
+
+
+//---------------------------------------------------------------------
+fscanf: (stream: *FILE, format: *const char, ...) -> int;
+
+sscanf: (buf: *const char, format: *const char, ...) -> int;
+
+
+//---------------------------------------------------------------------
+exit: (status: int) -> void;
+
+
+//---------------------------------------------------------------------
+memset: (s: *void, c: int, n: size_t) -> *void;
+
+memcpy: (d: *void, s: *const void, n: size_t) -> *void;
+
+memcmp: (s1: *const void, s2: *const void, n: size_t) -> int;
+
+
+//---------------------------------------------------------------------
+{   voidc_unit_end_module(); }
+
+

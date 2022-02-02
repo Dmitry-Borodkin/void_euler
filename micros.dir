@@ -1,0 +1,55 @@
+               ****  Project Euler in Void  ****               │
+                                                               │
+                                                               │
+ 001  Multiples of 3 or 5                                      │0001_Multiples_of_3_or_5/micros.dir
+                                                               │
+ 002  Even Fibonacci numbers                                   │0002_Even_Fibonacci_numbers/micros.dir
+                                                               │
+ 003  Largest prime factor                                     │0003_Largest_prime_factor/micros.dir
+                                                               │
+ 004  Largest palindrome product                               │0004_Largest_palindrome_product/micros.dir
+                                                               │
+ 005  Smallest multiple                                        │0005_Smallest_multiple/micros.dir
+                                                               │
+ 006  Sum square difference                                    │0006_Sum_square_difference/micros.dir
+                                                               │
+ 007  10001st prime                                            │0007_10001st_prime/micros.dir
+                                                               │
+ 008  Largest product in a series                              │0008_Largest_product_in_a_series/micros.dir
+                                                               │
+ 009  Special Pythagorean triplet                              │0009_Special_Pythagorean_triplet/micros.dir
+                                                               │
+ 010  Summation of primes                                      │0010_Summation_of_primes/micros.dir
+                                                               │
+ 011  Largest product in a grid                                │0011_Largest_product_in_a_grid/micros.dir
+                                                               │
+ 012  Highly divisible triangular number                       │0012_Highly_divisible_triangular_number/micros.dir
+                                                               │
+ 013  Large sum                                                │0013_Large_sum/micros.dir
+                                                               │
+ 014  Longest Collatz sequence                                 │0014_Longest_Collatz_sequence/micros.dir
+                                                               │
+ 015  Lattice paths                                            │0015_Lattice_paths/micros.dir
+                                                               │
+ 016  Power digit sum                                          │0016_Power_digit_sum/micros.dir
+                                                               │
+ 017  Number letter counts                                     │0017_Number_letter_counts/micros.dir
+                                                               │
+                                                               │
+                                                               │
+───────────────────────────────────────────────────────────────│
+Utility...                                                     │util/micros.dir
+                                                               │
+                                                               │
+═══════════════════════════════════════════════════════════════│*
+README                                                         │README.md
+                                                               │
+───────────────────────────────────────────────────────────────│
+MIT                                                            │LICENSE
+═══════════════════════════════════════════════════════════════│
+.hgignore                                                      │.hgignore
+                                                               │
+hg bookmark -f master                   WTF?                   │hg bookmark -f master
+───────────────────────────────────────────────────────────────│
+                                                               │
+                                                               │

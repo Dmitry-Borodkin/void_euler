@@ -1,0 +1,8 @@
+syntax: glob
+
+**.o
+
+**.voidc*
+
+**micros.incdirs
+

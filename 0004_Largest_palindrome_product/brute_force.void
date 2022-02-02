@@ -1,0 +1,77 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+palindromes: &*bool := v_undef();
+
+{   palindromes := v_malloc(bool, 1000000);
+
+    memset(palindromes, 0, 1000000);
+
+    n: &int := 999;
+
+    loop
+    {
+        if (n < 100) v_break();
+
+        d0 = n % 10;
+        d1 = n % 100 / 10;
+        d2 = n / 100;
+
+        p = n*1000 + d0*100 + d1*10 + d2;
+
+        palindromes[p] := true;
+
+//      printf("p: %d\n", p);
+
+        --n;
+    }
+}
+
+
+//---------------------------------------------------------------------
+{   maxprod: &int := 0;
+
+    n: &int := 999;
+
+    loop
+    {
+        if (n < 100) v_break();
+
+        m: &int := 999;
+
+        loop
+        {
+            if (m < n) v_break();
+
+            p = n * m;
+
+            if (p <= maxprod) v_break();
+
+            if (palindromes[p])
+            {
+//              printf("%d: (%d, %d)\n", p, n, m);
+
+                maxprod := p;
+            }
+
+            --m;
+        }
+
+        if (m == 999) v_break();
+
+        --n;
+    }
+
+    printf("maxprod: %d\n", maxprod);
+}
+
+
+//---------------------------------------------------------------------
+{
+    v_mfree(palindromes);
+}
+

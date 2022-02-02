@@ -1,0 +1,98 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+log: (float(64)) -> float(64);
+
+
+//---------------------------------------------------------------------
+  N = 10001;
+//N = 10000001;
+
+{   printf("N: %d\n", N); }
+
+
+//---------------------------------------------------------------------
+S: &int := v_undef();
+
+sieve: &*bool := v_undef();
+
+{   S := (N*(log(N) + log(log(N))) : int) + 1;
+
+    sieve := v_malloc(bool, S);
+
+    memset(sieve, 0, S);
+
+    i: &int := 1;
+
+    loop
+    {
+        if (i >= S) v_break();
+
+        sieve[i] := true;
+
+        i += 2;
+    }
+
+    sieve[2] := true;
+
+    i := 3;
+
+    k: &int := v_undef();
+
+    loop
+    {
+        if (i >= S) v_break();
+
+        if (sieve[i])
+        {
+            k := 2*i;
+
+            loop
+            {
+                if (k >= S) v_break();
+
+                sieve[k] := false;
+
+                k += i;
+            }
+        }
+
+        ++i;
+    }
+}
+
+
+//---------------------------------------------------------------------
+{
+    n: &int := 1;
+
+    p: &int := 3;
+
+    loop
+    {
+        if (p >= S) v_break();
+
+        if (sieve[p])
+        {
+            ++n;
+
+            if (n == N) v_break();
+        }
+
+        p += 2;
+    }
+
+    if (n == N) printf("Found: %d\n", p);
+    else        printf("Not found\n");
+}
+
+
+//---------------------------------------------------------------------
+{
+    v_mfree(sieve);
+}
+

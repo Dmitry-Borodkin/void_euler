@@ -1,0 +1,47 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+{
+    N = 1000000;
+
+    maxlen: &int := 0;
+    maxnum: &int := 0;
+
+    n: &int := 1;
+
+    loop
+    {
+        if (n >= N) v_break();
+
+        m: &int(64) := n;
+
+        len: &int := 1;
+
+        loop
+        {
+            if (m == 1) v_break();
+
+            if (m & 1)  m := 3*m + 1;
+            else        m := m / 2;
+
+            ++len;
+        }
+
+        if (maxlen < len)
+        {
+            maxlen := len;
+            maxnum := n;
+        }
+
+        ++n;
+    }
+
+    printf("%ld (%ld)\n", maxnum, maxlen);
+}
+
+
+
