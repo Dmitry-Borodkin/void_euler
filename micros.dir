@@ -35,6 +35,12 @@
                                                                │
  017  Number letter counts                                     │0017_Number_letter_counts/micros.dir
                                                                │
+ 018  Maximum path sum I                                       │0018_Maximum_path_sum_I/micros.dir
+                                                               │
+ 019  Counting Sundays                                         │0019_Counting_Sundays/micros.dir
+                                                               │
+ 020  Factorial digit sum                                      │0020_Factorial_digit_sum/micros.dir
+                                                               │
                                                                │
                                                                │
 ───────────────────────────────────────────────────────────────│

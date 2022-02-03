@@ -1,0 +1,72 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+
+//---------------------------------------------------------------------
+//{ v_debug_print_module(1); }
+{
+//  N = 10;
+    N = 100;
+
+    L = 160;    //- ?
+
+    D = v_malloc(int(8) , L);
+
+    memset(D, 0, L);
+
+    D[0] := 1;
+
+    l: &int := 0;
+    c: &int := 0;
+
+    n: &int := 2;
+
+    loop
+    {
+        if (n > N) v_break();
+
+        i: &int := 0;
+
+        loop
+        {
+            if (l < i  &&  c == 0  &&  D[i] == 0) v_break();
+
+            dd = n*D[i] + c;
+
+            D[i] := (dd % 10 : int(8));
+
+            c := dd / 10;
+
+            if (l < i  &&  D[i]) l := i;
+
+            ++i;
+        }
+
+        ++n;
+    }
+
+    sum: &int := 0;
+
+    loop
+    {
+        if (l < 0) v_break();
+
+        sum += D[l];
+
+//      printf("%d", D[l]);
+
+        --l;
+    }
+
+//  printf("\n");
+
+    printf("%d\n", sum);
+
+    v_mfree(D);
+}
+
+
+
