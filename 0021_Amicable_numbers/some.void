@@ -1,0 +1,69 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+sum_proper_divisors: (n: int) -> int
+{
+    s: &int := 1;
+
+    i: &int := 2;
+
+    loop
+    {
+        if (i >= n) v_break();
+
+        i2 = i * i;
+
+        if (i2 == n)  v_return(s + i);
+        if (i2 > n)   v_return(s);
+
+        if (n%i == 0) s += i + n/i;
+
+        ++i;
+    }
+
+    v_return(s);    //- ?
+}
+
+
+//---------------------------------------------------------------------
+is_amicable: (n: int, N: int) -> bool
+{
+    m = sum_proper_divisors(n);
+
+    if (m == n) v_return(false);
+    if (m >= N) v_return(false);
+
+    v_return(n == sum_proper_divisors(m));
+}
+
+
+//---------------------------------------------------------------------
+{
+    N = 10000;
+
+    s: &int := 0;
+
+    n: &int := 2;
+
+    loop
+    {
+        if (n >= N) v_break();
+
+        if (is_amicable(n, N))
+        {
+            s += n;
+
+            printf("(%d, %d)\n", n, sum_proper_divisors(n));
+        }
+
+        ++n;
+    }
+
+    printf("%d\n", s);
+}
+
+

@@ -1,0 +1,132 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+names_cmp: (l: *const void, r: *const void) -> int
+{
+    ls = *(l: *const *const char);
+    rs = *(r: *const *const char);
+
+    v_return(strcmp(ls, rs));
+}
+
+
+//---------------------------------------------------------------------
+name_score: (s: *const char) -> int
+{
+    r: &int := 0;
+
+    sp: & *const char := s;
+
+    loop
+    {
+        if (!*sp) v_break();
+
+        r += *sp - ('A' - 1);
+
+        ++sp;
+    }
+
+    v_return(r);
+}
+
+
+//---------------------------------------------------------------------
+{
+    res = v_alloca(v_util_opaque_std_any);
+    v_initialize(res);
+    defer v_terminate(res);
+
+    {   f = v_fopen("names.txt", "rb");
+        defer fclose(f);
+
+        //-------------------------------------------------------------
+        grm = v_alloca(v_peg_opaque_grammar_sptr);
+        v_initialize(grm);
+        defer v_terminate(grm);
+
+        v_peg_get_grammar(grm);
+
+        //-------------------------------------------------------------
+        ctx = v_alloca(v_peg_opaque_context_sptr, 2);
+        v_initialize(ctx, 2);
+        defer v_terminate(ctx, 2);
+
+        my_ctx    = ctx + 0;
+        saved_ctx = ctx + 1;
+
+        cur_pos: &int := v_undef();
+
+        v_peg_make_context(my_ctx, (fgetc: *((*void) -> int)), f, grm);
+
+        //-------------------------------------------------------------
+        v_peg_get_context(saved_ctx);
+        defer v_peg_set_context(saved_ctx);
+
+        v_peg_set_context(my_ctx);
+
+        expr_list_q = v_quark_from_string("expr_list");
+
+        v_peg_parse(res, expr_list_q);
+    }
+
+    //-----------------------------------------------------------------
+    plst = v_std_any_get_pointer(v_ast_opaque_expr_list_sptr, res);
+
+    count = v_list_get_size(plst);
+
+//  printf("count: %lu\n", count);
+
+    //-----------------------------------------------------------------
+    names = v_malloc(*const char, count);
+    defer v_mfree(names);
+
+    {   expr = v_alloca(v_ast_opaque_expr_sptr);
+        v_initialize(expr);
+        defer v_terminate(expr);
+
+        i: &int := 0;
+
+        loop
+        {
+            if (i >= count) v_break();
+
+            v_list_get_items(plst, i, expr);
+
+            names[i] := v_ast_expr_string_get_string(expr);
+
+//          printf("%s\n", names[i]);
+
+            ++i;
+        }
+    }
+
+    //-----------------------------------------------------------------
+    qsort(names, count, v_type_integer_get_width(intptr_t)/8, names_cmp);
+
+    //-----------------------------------------------------------------
+    total: &int := 0;
+
+    i: &int := 0;
+
+    loop
+    {
+        if (i >= count) v_break();
+
+        score = name_score(names[i]);
+
+        total += (i+1) * score;
+
+//      printf("%s: %d, %d\n", names[i], score, total);
+
+        ++i;
+    }
+
+    //-----------------------------------------------------------------
+    printf("%d\n", total);
+}
+
+

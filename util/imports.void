@@ -147,9 +147,17 @@ sprintf: (str: *char, format: *const char, ...) -> int;
 
 
 //---------------------------------------------------------------------
+fgetc: (stream: *FILE) -> int;
+
 fscanf: (stream: *FILE, format: *const char, ...) -> int;
 
 sscanf: (buf: *const char, format: *const char, ...) -> int;
+
+
+//---------------------------------------------------------------------
+qsort: (ptr: *void, count: size_t, size: size_t, comp: *((*const void, *const void) -> int)) -> void;
+
+strcmp: (*const char, *const char) -> int;
 
 
 //---------------------------------------------------------------------
