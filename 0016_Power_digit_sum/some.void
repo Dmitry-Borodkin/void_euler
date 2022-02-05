@@ -17,6 +17,7 @@ log: (float(64)) -> float(64);
     L = (N*log(2)/log(10) : int) + 2;       //- ?
 
     D = v_malloc(int(8) , L);
+    defer v_mfree(D);
 
     memset(D, 0, L);
 
@@ -67,8 +68,6 @@ log: (float(64)) -> float(64);
 //  printf("\n");
 
     printf("%d\n", sum);
-
-    v_mfree(D);
 }
 
 

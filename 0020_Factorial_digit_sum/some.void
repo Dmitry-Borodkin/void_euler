@@ -13,6 +13,7 @@
     L = 160;    //- ?
 
     D = v_malloc(int(8) , L);
+    defer v_mfree(D);
 
     memset(D, 0, L);
 
@@ -63,8 +64,6 @@
 //  printf("\n");
 
     printf("%d\n", sum);
-
-    v_mfree(D);
 }
 
 
