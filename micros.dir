@@ -45,6 +45,12 @@
                                                                │
  022  Names scores                                             │0022_Names_scores/micros.dir
                                                                │
+ 023  Non-abundant sums                                        │0023_Non-abundant_sums/micros.dir
+                                                               │
+ 024  Lexicographic permutations                               │0024_Lexicographic_permutations/micros.dir
+                                                               │
+ 025  1000-digit Fibonacci number                              │0025_1000-digit_Fibonacci_number/micros.dir
+                                                               │
                                                                │
 ───────────────────────────────────────────────────────────────│
 Utility...                                                     │util/micros.dir
