@@ -51,6 +51,10 @@
                                                                │
  025  1000-digit Fibonacci number                              │0025_1000-digit_Fibonacci_number/micros.dir
                                                                │
+ 026  Reciprocal cycles                                        │0026_Reciprocal_cycles/micros.dir
+                                                               │
+ 027  Quadratic primes                                         │0027_Quadratic_primes/micros.dir
+                                                               │
                                                                │
 ───────────────────────────────────────────────────────────────│
 Utility...                                                     │util/micros.dir

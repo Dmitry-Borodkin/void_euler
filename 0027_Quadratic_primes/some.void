@@ -1,0 +1,145 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+P = 15000;
+
+
+//---------------------------------------------------------------------
+sieve: &*bool := v_undef();
+
+pcount: &int := 0;
+
+{   sieve := v_malloc(bool, P);
+
+    memset(sieve, 0, P);
+
+    i: &int := 1;
+
+    loop
+    {
+        if (i >= P) v_break();
+
+        sieve[i] := true;
+
+        i += 2;
+    }
+
+    sieve[2] := true;
+
+    i := 3;
+
+    k: &int := v_undef();
+
+    loop
+    {
+        if (i >= P) v_break();
+
+        if (sieve[i])
+        {
+            ++pcount;
+
+            k := 2*i;
+
+            loop
+            {
+                if (k >= P) v_break();
+
+                sieve[k] := false;
+
+                k += i;
+            }
+        }
+
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------
+primes: &*int := v_undef();
+
+{   primes := v_malloc(int, pcount);
+
+    i: &int := 0;
+
+    p: &int := 3;
+
+    loop
+    {
+        if (p >= P) v_break();
+
+        if (sieve[p]) primes[i++] := p;
+
+        p += 2;
+    }
+}
+
+
+//---------------------------------------------------------------------
+{   nmax:  &int := 0;
+    abmax: &int := 0;
+
+    bi: &int := 0;
+
+    loop
+    {
+        if (bi >= pcount) v_break();
+
+        b = primes[bi];
+
+        if (b >= 1000) v_break();
+
+        ai: &int := 0;
+
+        loop
+        {
+            a = primes[ai] - b - 1;
+
+            if (a >= 1000) v_break();
+
+            n: &int := 2;       //- Sic!
+
+            loop
+            {
+                p = n*n + a*n + b;
+
+                if (p >= P)
+                {
+                    printf("got %d - abort!\n", p);
+
+                    v_return();
+                }
+
+                if (!sieve[p]) v_break();
+
+                if (nmax < n)
+                {
+                    nmax := n;
+
+                    abmax := a * b;
+                }
+
+                ++n;
+            }
+
+//          printf("(%d, %d): %d\n", a, b, n);
+
+            ++ai;
+        }
+
+        ++bi;
+    }
+
+    printf("%d %d\n", abmax, nmax);
+}
+
+
+//---------------------------------------------------------------------
+{
+    v_mfree(primes);
+    v_mfree(sieve);
+}
+
