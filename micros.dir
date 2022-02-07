@@ -55,6 +55,8 @@
                                                                │
  027  Quadratic primes                                         │0027_Quadratic_primes/micros.dir
                                                                │
+ 028  Number spiral diagonals                                  │0028_Number_spiral_diagonals/micros.dir
+                                                               │
                                                                │
 ───────────────────────────────────────────────────────────────│
 Utility...                                                     │util/micros.dir
