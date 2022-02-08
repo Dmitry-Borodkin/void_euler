@@ -1,0 +1,107 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+log2: (float(64)) -> float(64);
+
+
+//---------------------------------------------------------------------
+N = 100;
+
+{   w = (N*log2(N)+1 : unsigned);
+
+//  printf("w: %u\n", w);
+
+    v_add_type("num_t", v_uint_type(w));
+}
+
+
+//---------------------------------------------------------------------
+num: &num_t[N-1][N-1] := 0;
+
+
+//---------------------------------------------------------------------
+pow_num_t: (a: num_t, b: unsigned) -> num_t
+{
+    if (b == 0) v_return(1);
+    if (b == 1) v_return(a);
+
+    ret: &num_t := pow_num_t(a, b/2);
+
+    ret := ret * ret;
+
+    if (b & 1)  ret *= a;
+
+    v_return(ret);
+}
+
+
+//---------------------------------------------------------------------
+{
+    c: &int := 0;
+
+    a: &int := 2;
+
+    loop
+    {
+        if (a > N) v_break();
+
+        b: &int := 2;
+
+        loop
+        {
+            if (b > N) v_break();
+
+            ab = pow_num_t(a, b);
+
+            f: &bool := false;
+
+            a0: &int := 2;
+
+            loop
+            {
+                if (f) v_break();
+
+                if (a0 >= a) v_break();
+
+                b0: &int := 2;
+
+                loop
+                {
+                    if (b0 > N) v_break();
+
+                    a0b0 = num[a0-2][b0-2];
+
+                    if (a0b0 >= ab)
+                    {
+                        if (a0b0 == ab) f := true;
+
+                        v_break();
+                    }
+
+                    ++b0;
+                }
+
+                ++a0;
+            }
+
+            if (!f)
+            {
+                num[a-2][b-2] := ab;
+
+                ++c;
+            }
+
+            ++b;
+        }
+
+        ++a;
+    }
+
+    printf("%d\n", c);
+}
+
+

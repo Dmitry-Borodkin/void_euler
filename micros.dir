@@ -57,6 +57,8 @@
                                                                │
  028  Number spiral diagonals                                  │0028_Number_spiral_diagonals/micros.dir
                                                                │
+ 029  Distinct powers                                          │0029_Distinct_powers/micros.dir
+                                                               │
                                                                │
 ───────────────────────────────────────────────────────────────│
 Utility...                                                     │util/micros.dir
