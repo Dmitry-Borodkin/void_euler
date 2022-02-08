@@ -1,0 +1,64 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+pow: (float(64), float(64)) -> float(64);
+
+
+//---------------------------------------------------------------------
+N = 5;
+
+{
+    m: &int := 2;
+
+    loop
+    {
+        if (m*pow(9, N) < pow(10, m)) v_break();
+
+        ++m;
+    }
+
+    lim = (m*pow(9, N) : int);
+
+//  printf("lim: %d\n", lim);
+
+    sum: &int := 0;
+
+    n: &int := 10;
+
+    loop
+    {
+        if (n >= lim) v_break();
+
+        s: &int := 0;
+
+        nn: &int := n;
+
+        loop
+        {
+            if (nn == 0) v_break();
+
+            d = nn % 10;
+
+            s += (pow(d, N) : int);
+
+            nn := nn / 10;
+        }
+
+        if (n == s)
+        {
+//          printf("%d\n", n);
+
+            sum += n;
+        }
+
+        ++n;
+    }
+
+    printf("sum: %d\n", sum);
+}
+
+
