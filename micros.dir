@@ -59,6 +59,8 @@
                                                                │
  029  Distinct powers                                          │0029_Distinct_powers/micros.dir
                                                                │
+ 030  Digit fifth powers                                       │0030_Digit_fifth_powers/micros.dir
+                                                               │
                                                                │
 ───────────────────────────────────────────────────────────────│
 Utility...                                                     │util/micros.dir
