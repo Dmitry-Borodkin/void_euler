@@ -51,6 +51,21 @@ name_score: (s: *const char) -> int
         v_peg_get_grammar(grm);
 
         //-------------------------------------------------------------
+        grammar grm
+        {
+        parsers:
+
+            name_list = l:name_list ',' n:name      { mk_expr_list(l, n) }
+                      / n:name                      { mk_expr_list(0, n) }
+                      ;
+
+            name_list is left-recursive;
+
+            name = '\"' <[A-Z]*> '\"'               { mk_expr_string($1) }
+                 ;
+        }
+
+        //-------------------------------------------------------------
         ctx = v_alloca(v_peg_opaque_context_sptr, 2);
         v_initialize(ctx, 2);
         defer v_terminate(ctx, 2);
@@ -68,9 +83,9 @@ name_score: (s: *const char) -> int
 
         v_peg_set_context(my_ctx);
 
-        expr_list_q = v_quark_from_string("expr_list");
+        v_peg_parse(res, v_quark_from_string("name_list"));
 
-        v_peg_parse(res, expr_list_q);
+//      v_peg_parse(res, v_quark_from_string("expr_list"));     //- Slow...
     }
 
     //-----------------------------------------------------------------
