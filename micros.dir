@@ -61,6 +61,8 @@
                                                                │
  030  Digit fifth powers                                       │0030_Digit_fifth_powers/micros.dir
                                                                │
+ 031  Coin sums                                                │0031_Coin_sums/micros.dir
+                                                               │
                                                                │
 ───────────────────────────────────────────────────────────────│
 Utility...                                                     │util/micros.dir

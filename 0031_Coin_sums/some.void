@@ -1,0 +1,52 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+coins: &int[8] := v_undef();
+
+{   coins[0] :=   1;
+    coins[1] :=   2;
+    coins[2] :=   5;
+    coins[3] :=  10;
+    coins[4] :=  20;
+    coins[5] :=  50;
+    coins[6] := 100;
+    coins[7] := 200;
+}
+
+
+//---------------------------------------------------------------------
+compute: (i: int, p: int) -> int
+{
+    if (p == 0) v_return(1);
+    if (i == 0) v_return(1);
+    if (i == 1) v_return(p/2 + 1);
+
+    s: &int := 0;
+
+    pp: &int := p;
+
+    loop
+    {
+        if (pp < 0) v_break();
+
+        s += compute(i-1, pp);
+
+        pp -= coins[i];
+    }
+
+    v_return(s);
+}
+
+
+//---------------------------------------------------------------------
+{
+    s = compute(7, 200);
+
+    printf("%d\n", s);
+}
+
+
