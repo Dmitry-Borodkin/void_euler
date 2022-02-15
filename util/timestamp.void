@@ -5,6 +5,31 @@
 
 
 //---------------------------------------------------------------------
+my_source =
+"""
+#include <time.h>
+
+double my_timestamp(void)
+{
+    struct timespec rawtime;
+    struct tm * timeinfo;
+    double ret;
+
+    clock_gettime(CLOCK_REALTIME, &rawtime);
+    timeinfo = localtime(&rawtime.tv_sec);
+
+    ret = timeinfo->tm_hour;
+    ret = 60*ret + timeinfo->tm_min;
+    ret = 60*ret + timeinfo->tm_sec;
+    ret += rawtime.tv_nsec * 1e-9;
+
+    return ret;
+}
+
+""";
+
+
+//---------------------------------------------------------------------
 {   buflen = 1024;
 
     buffer = v_malloc(char, buflen);
@@ -33,28 +58,7 @@
 
         fprintf(p, "clang -x c - -O3 -c -o %s <<HEREDOC\n", buffer);
 
-        fputs(
-            """
-            #include <time.h>
-
-            double my_timestamp(void)
-            {
-                struct timespec rawtime;
-                struct tm * timeinfo;
-                double ret;
-
-                clock_gettime(CLOCK_REALTIME, &rawtime);
-                timeinfo = localtime(&rawtime.tv_sec);
-
-                ret = timeinfo->tm_hour;
-                ret = 60*ret + timeinfo->tm_min;
-                ret = 60*ret + timeinfo->tm_sec;
-                ret += rawtime.tv_nsec * 1e-9;
-
-                return ret;
-            }
-
-            """, p);
+        fputs(my_source, p);
 
         fputs("\nHEREDOC\n", p);
     }
