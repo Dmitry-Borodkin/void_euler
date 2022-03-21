@@ -1,0 +1,139 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+N = 9;
+
+digits: &uint(8)[N] := 0;
+
+
+//---------------------------------------------------------------------
+pr_digits: () -> void
+{
+    j: &int := 0;
+
+    loop
+    {
+        if (j == N) v_break();
+
+        printf("%d", digits[j]+1);
+
+        ++j;
+    }
+
+    printf("\n");
+}
+
+
+//---------------------------------------------------------------------
+get_num: (p0: int, p1: int) -> int
+{
+    p: &int := p0;
+
+    num: &int := 0;
+
+    loop
+    {
+        if (p == p1) v_break();
+
+        num := 10*num + digits[p] + 1;
+
+        ++p;
+    }
+
+    v_return(num);
+}
+
+
+//---------------------------------------------------------------------
+old_p: &int := 0;
+
+sum: &int := 0;
+
+check: () -> void
+{
+//  pr_digits();
+
+    i: &int := 1;
+
+    loop
+    {
+        if (i == N) v_break();
+
+        p = get_num(0, i);
+
+        j: &int := i+1;
+
+        loop
+        {
+            if (j == N) v_break();
+
+            a = get_num(i, j);
+            b = get_num(j, N);
+
+            if (p == a*b)
+            {
+//              printf("%d == %d * %d\n", p, a, b);
+
+                if (old_p != p)
+                {
+                    sum += p;
+
+                    old_p := p;
+                }
+            }
+
+            ++j;
+        }
+
+        ++i;
+    }
+}
+
+
+//---------------------------------------------------------------------
+permut: (i: int, flags: int) -> void
+{
+    if (i == N)
+    {
+        check();
+
+        v_return();
+    }
+
+    k: &int := 0;
+
+    loop
+    {
+        if (k == N) v_break();
+
+        if (!(flags & (1 << k)))
+        {
+            digits[i] := (k : uint(8));
+
+            permut(i+1, flags | (1 << k));
+        }
+
+        ++k;
+    }
+}
+
+
+//---------------------------------------------------------------------
+{
+    permut(0, 0);
+
+    printf("\n%d\n", sum);
+}
+
+
+
+
+
+
+
+
+

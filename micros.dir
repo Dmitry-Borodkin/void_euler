@@ -63,6 +63,8 @@
                                                                │
  031  Coin sums                                                │0031_Coin_sums/micros.dir
                                                                │
+ 032  Pandigital products                                      │0032_Pandigital_products/micros.dir
+                                                               │
                                                                │
 ───────────────────────────────────────────────────────────────│
 Utility...                                                     │util/micros.dir
