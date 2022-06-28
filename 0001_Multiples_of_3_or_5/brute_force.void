@@ -11,15 +11,9 @@ brute_force: (N: long) -> long
 {
     sum: &long := 0;
 
-    i: &long := 1;
-
-    loop
+    for (i: &long := 1; i < N; ++i)
     {
-        if (i >= N) v_break();
-
         if (i%3 == 0  ||  i%5 == 0) sum += i;
-
-        ++i;
     }
 
     v_return(sum);
@@ -47,19 +41,13 @@ doit: () -> void
     fflush(stdout);
 
 
-    N := 1000;
-
-    loop
+    for (N := 1000; N <= 1000000; N *= 10)
     {
-        if (N > 1000000) v_break();
-
         t = checktime(doit, NC);
 
         printf("N: %ld, R: %ld, t: %g, (t-t0): %g\n", N, R, t, t-t0);
 
         fflush(stdout);
-
-        N *= 10;
     }
 }
 

@@ -8,19 +8,10 @@
 //N = 40;
 N = 1000;
 
-{   a: &int := 1;
-    b: &int := v_undef();
-
-    loop
+{   for (a: &int := 1; a < N; ++a)
     {
-        if (a >= N) v_break();
-
-        b := a + 1;
-
-        loop
+        for (b: &int := a + 1; b < N; ++b)
         {
-            if (b >= N) v_break();
-
             c = N - (a + b);
 
             if (c <= 0) v_break();
@@ -31,11 +22,7 @@ N = 1000;
 
                 printf("abc: %d\n", a*b*c);
             }
-
-            ++b;
         }
-
-        ++a;
     }
 }
 

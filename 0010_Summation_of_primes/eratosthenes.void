@@ -18,42 +18,22 @@ sieve: &*bool := v_undef();
 
     memset(sieve, 0, N);
 
-    i: &int := 1;
-
-    loop
+    for (i: &int := 1; i < N; i += 2)
     {
-        if (i >= N) v_break();
-
         sieve[i] := true;
-
-        i += 2;
     }
 
     sieve[2] := true;
 
-    i := 3;
-
-    k: &int := v_undef();
-
-    loop
+    for (i: &int := 3; i < N; i += 2)
     {
-        if (i >= N) v_break();
-
         if (sieve[i])
         {
-            k := 2*i;
-
-            loop
+            for (k: &int := 2*i; k < N; k += i)
             {
-                if (k >= N) v_break();
-
                 sieve[k] := false;
-
-                k += i;
             }
         }
-
-        ++i;
     }
 }
 
@@ -62,15 +42,9 @@ sieve: &*bool := v_undef();
 {
     sum: &long := 2;
 
-    p: &int := 3;
-
-    loop
+    for (p: &int := 3; p < N; p += 2)
     {
-        if (p >= N) v_break();
-
         if (sieve[p])   sum += p;
-
-        p += 2;
     }
 
     printf("sum: %ld\n", sum);

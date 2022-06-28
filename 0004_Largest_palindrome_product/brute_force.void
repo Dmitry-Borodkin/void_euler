@@ -11,12 +11,8 @@ palindromes: &*bool := v_undef();
 
     memset(palindromes, 0, 1000000);
 
-    n: &int := 999;
-
-    loop
+    for (n: &int := 999; n >= 100; --n)
     {
-        if (n < 100) v_break();
-
         d0 = n % 10;
         d1 = n % 100 / 10;
         d2 = n / 100;
@@ -26,8 +22,6 @@ palindromes: &*bool := v_undef();
         palindromes[p] := true;
 
 //      printf("p: %d\n", p);
-
-        --n;
     }
 }
 
@@ -35,18 +29,10 @@ palindromes: &*bool := v_undef();
 //---------------------------------------------------------------------
 {   maxprod: &int := 0;
 
-    n: &int := 999;
-
-    loop
+    for (n: &int := 999; n >= 100; --n)
     {
-        if (n < 100) v_break();
-
-        m: &int := 999;
-
-        loop
+        for (m: &int := 999; m >= n; --m)
         {
-            if (m < n) v_break();
-
             p = n * m;
 
             if (p <= maxprod) v_break();
@@ -57,13 +43,7 @@ palindromes: &*bool := v_undef();
 
                 maxprod := p;
             }
-
-            --m;
         }
-
-        if (m == 999) v_break();
-
-        --n;
     }
 
     printf("maxprod: %d\n", maxprod);

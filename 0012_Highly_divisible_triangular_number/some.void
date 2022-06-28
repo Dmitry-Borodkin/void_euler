@@ -9,20 +9,14 @@ count_divisors: (n: int) -> int
 {
     c: &int := 0;
 
-    i: &int := 1;
-
-    loop
+    for (i: &int := 1; i <= n; ++i)
     {
-        if (i > n) v_break();
-
         i2 = i * i;
 
         if (i2 == n)  v_return(2*c + 1);
         if (i2 > n)   v_return(2*c);
 
         if (n%i == 0) ++c;
-
-        ++i;
     }
 
     v_return(c);    //- ?
@@ -33,12 +27,8 @@ count_divisors: (n: int) -> int
 {
     N = 12375;
 
-    n: &int := 1;
-
-    loop
+    for (n: &int := 1; n <= N; ++n)
     {
-        if (n > N) v_break();
-
         m = n * (n + 1) / 2;
 
         c = count_divisors(m);
@@ -51,8 +41,6 @@ count_divisors: (n: int) -> int
         }
 
 //      printf("%d: %d\n", m, c);
-
-        ++n;
     }
 }
 
