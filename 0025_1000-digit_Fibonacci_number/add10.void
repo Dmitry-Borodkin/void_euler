@@ -22,11 +22,9 @@
 
     n: &int := 2;
 
-    loop
+    for (; ; ++n)
     {
-        i: &int := 0;
-
-        loop
+        for (i: &int := 0; ; ++i)
         {
             if (l < i  &&  c == 0  &&  D0[i] == 0) v_break();
 
@@ -39,8 +37,6 @@
 //          printf("%d", D0[i]);
 
             if (l < i  &&  D0[i]) l := i;
-
-            ++i;
         }
 
 //      printf("\n");
@@ -51,8 +47,6 @@
 
         D0 := D1;
         D1 := D2;
-
-        ++n;
     }
 
     printf("%d\n", n);

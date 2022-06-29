@@ -154,15 +154,9 @@ print_numeral: (n: int) -> int
 {
     r: &int := 0;
 
-    n: &int := 1;
-
-    loop
+    for (n: &int := 1; n <= 1000; ++n)
     {
-        if (n > 1000) v_break();
-
         r += print_numeral(n);
-
-        ++n;
     }
 
     printf("\n%d\n", r);

@@ -14,11 +14,9 @@ N = 5;
 {
     m: &int := 2;
 
-    loop
+    for (; ; ++m)
     {
         if (m*pow(9, N) < pow(10, m)) v_break();
-
-        ++m;
     }
 
     lim = (m*pow(9, N) : int);
@@ -27,25 +25,15 @@ N = 5;
 
     sum: &int := 0;
 
-    n: &int := 10;
-
-    loop
+    for (n: &int := 10; n < lim; ++n)
     {
-        if (n >= lim) v_break();
-
         s: &int := 0;
 
-        nn: &int := n;
-
-        loop
+        for (nn: &int := n; nn > 0; nn /= 10)
         {
-            if (nn == 0) v_break();
-
             d = nn % 10;
 
             s += (pow(d, N) : int);
-
-            nn := nn / 10;
         }
 
         if (n == s)
@@ -54,8 +42,6 @@ N = 5;
 
             sum += n;
         }
-
-        ++n;
     }
 
     printf("sum: %d\n", sum);

@@ -14,20 +14,12 @@ log: (float(64)) -> float(64);
 
     log_N = log(N);
 
-    a: &int := 2;
-
-    loop
+    for (a: &int := 2; a <= N; ++a)
     {
-        if (a > N) v_break();
-
         log_a = log(a);
 
-        b: &int := 2;
-
-        loop
+        for (b: &int := 2; b <= N; ++b)
         {
-            if (b > N) v_break();
-
             if (b*log_a > log_N)
             {
                 if (b > 2)  printf("\n");
@@ -36,11 +28,7 @@ log: (float(64)) -> float(64);
             }
 
             printf("%d^%d ", a, b);
-
-            ++b;
         }
-
-        ++a;
     }
 }
 

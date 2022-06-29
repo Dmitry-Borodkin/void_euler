@@ -13,21 +13,15 @@
     pmax: &int := 0;
     nmax: &int := 0;
 
-    n: &int := 1;
-
-    loop
+    for (n: &int := 1; n < N; ++n)
     {
-        if (n >= N) v_break();
-
         memset(D, 0, n*4);
 
 //      printf("%3d ", n);
 
         t: &int := 1;
 
-        i: &int := 0;
-
-        loop
+        for (i: &int := 0; ; ++i)
         {
             d = t / n;
             r = t % n;
@@ -52,11 +46,7 @@
             D[r] := i;
 
             t := r * 10;
-
-            ++i;
         }
-
-        ++n;
     }
 
     printf("%d\n", nmax);

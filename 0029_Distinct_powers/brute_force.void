@@ -43,36 +43,20 @@ pow_num_t: (a: num_t, b: unsigned) -> num_t
 {
     c: &int := 0;
 
-    a: &int := 2;
-
-    loop
+    for (a: &int := 2; a <= N; ++a)
     {
-        if (a > N) v_break();
-
-        b: &int := 2;
-
-        loop
+        for (b: &int := 2; b <= N; ++b)
         {
-            if (b > N) v_break();
-
             ab = pow_num_t(a, b);
 
             f: &bool := false;
 
-            a0: &int := 2;
-
-            loop
+            for (a0: &int := 2; a0 < a; ++a0)
             {
                 if (f) v_break();
 
-                if (a0 >= a) v_break();
-
-                b0: &int := 2;
-
-                loop
+                for (b0: &int := 2; b0 <= N; ++b0)
                 {
-                    if (b0 > N) v_break();
-
                     a0b0 = num[a0-2][b0-2];
 
                     if (a0b0 >= ab)
@@ -81,11 +65,7 @@ pow_num_t: (a: num_t, b: unsigned) -> num_t
 
                         v_break();
                     }
-
-                    ++b0;
                 }
-
-                ++a0;
             }
 
             if (!f)
@@ -94,11 +74,7 @@ pow_num_t: (a: num_t, b: unsigned) -> num_t
 
                 ++c;
             }
-
-            ++b;
         }
-
-        ++a;
     }
 
     printf("%d\n", c);

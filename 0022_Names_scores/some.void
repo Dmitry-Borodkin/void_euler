@@ -19,15 +19,9 @@ name_score: (s: *const char) -> int
 {
     r: &int := 0;
 
-    sp: & *const char := s;
-
-    loop
+    for (sp: & *const char := s; *sp; ++sp)
     {
-        if (!*sp) v_break();
-
         r += *sp - ('A' - 1);
-
-        ++sp;
     }
 
     v_return(r);
@@ -103,19 +97,13 @@ name_score: (s: *const char) -> int
         v_initialize(expr);
         defer v_terminate(expr);
 
-        i: &int := 0;
-
-        loop
+        for (i: &int := 0; i < count; ++i)
         {
-            if (i >= count) v_break();
-
             v_list_get_items(plst, i, expr);
 
             names[i] := v_ast_expr_string_get_string(expr);
 
 //          printf("%s\n", names[i]);
-
-            ++i;
         }
     }
 
@@ -125,19 +113,13 @@ name_score: (s: *const char) -> int
     //-----------------------------------------------------------------
     total: &int := 0;
 
-    i: &int := 0;
-
-    loop
+    for (i: &int := 0; i < count; ++i)
     {
-        if (i >= count) v_break();
-
         score = name_score(names[i]);
 
         total += (i+1) * score;
 
 //      printf("%s: %d, %d\n", names[i], score, total);
-
-        ++i;
     }
 
     //-----------------------------------------------------------------

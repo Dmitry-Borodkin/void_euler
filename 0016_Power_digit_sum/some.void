@@ -26,15 +26,9 @@ log: (float(64)) -> float(64);
     l: &int := 0;
     c: &int := 0;
 
-    n: &int := 0;
-
-    loop
+    for (n: &int := 0; n < N; ++n)
     {
-        if (n >= N) v_break();
-
-        i: &int := 0;
-
-        loop
+        for (i: &int := 0; ; ++i)
         {
             if (l < i  &&  c == 0  &&  D[i] == 0) v_break();
 
@@ -45,24 +39,16 @@ log: (float(64)) -> float(64);
             c := dd / 10;
 
             if (l < i  &&  D[i]) l := i;
-
-            ++i;
         }
-
-        ++n;
     }
 
     sum: &int := 0;
 
-    loop
+    for (; l >= 0; --l)
     {
-        if (l < 0) v_break();
-
         sum += D[l];
 
 //      printf("%d", D[l]);
-
-        --l;
     }
 
 //  printf("\n");

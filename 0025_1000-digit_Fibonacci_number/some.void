@@ -38,7 +38,7 @@ ten_pow_999: &num_t := v_undef();
 
     n: &int := 2;
 
-    loop
+    for (; ; ++n)
     {
         i = i0 + i1;
 
@@ -46,8 +46,6 @@ ten_pow_999: &num_t := v_undef();
 
         i0 := i1;
         i1 := i;
-
-        ++n;
     }
 
     printf("%d\n", n);
