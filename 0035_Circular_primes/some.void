@@ -1,0 +1,105 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+N = 1000000;
+
+
+//---------------------------------------------------------------------
+sieve: &*bool := v_undef();
+
+{   sieve := v_malloc(bool, N);
+
+    memset(sieve, 0, N);
+
+    for (i: &int := 3; i < N; i += 2)
+    {
+        sieve[i] := true;
+    }
+
+    sieve[2] := true;
+
+    for (i: &int := 3; i < N; i += 2)
+    {
+        if (sieve[i])
+        {
+            for (k: &int := 2*i; k < N; k += i)
+            {
+                sieve[k] := false;
+            }
+        }
+    }
+}
+
+
+//---------------------------------------------------------------------
+check_circularity: (n: int, p: int) -> bool
+{
+    order: &int := 1;
+
+    for (i: &int := 1; i < n; ++i)
+    {
+        order *= 10;
+    }
+
+    pp: &int := p;
+
+    for (i: &int := 0; i < n; ++i)
+    {
+        if (!sieve[pp]) v_return(false);
+
+        pp := 10*(pp%order) + (pp/order);
+    }
+
+    v_return(true);
+}
+
+
+//---------------------------------------------------------------------
+check_order: (n: int) -> int
+{
+    order: &int := 1;
+
+    for (i: &int := 1; i < n; ++i)
+    {
+        order *= 10;
+    }
+
+    s: &int := 0;
+
+    for (p: &int := order; p < 10*order; ++p)
+    {
+        if (check_circularity(n, p))
+        {
+            ++s;
+
+//          printf("%d\n", p);
+        }
+    }
+
+    v_return(s);
+}
+
+
+//---------------------------------------------------------------------
+{
+    s: &int := 0;
+
+    for (n: &int := 1; n <= 6; ++n)
+    {
+        s += check_order(n);
+    }
+
+    printf("sum: %d\n", s);
+}
+
+
+//---------------------------------------------------------------------
+{
+    v_mfree(sieve);
+}
+
+
