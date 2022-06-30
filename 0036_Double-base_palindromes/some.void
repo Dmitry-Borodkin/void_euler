@@ -1,0 +1,50 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+check_palindrome: (n: int, b: int) -> bool
+{
+    d: &int(8)[32] := v_undef();
+
+    l: &int := 0;
+
+    for (nn: &int := n; l < 32; ++l)
+    {
+        d[l] := (nn % b : int(8));
+
+        nn /= b;
+
+        if (nn == 0)  v_break();
+    }
+
+    for (i: &int := 0; i < l; ++i, --l)
+    {
+        if (d[i] != d[l])  v_return(false);
+    }
+
+    v_return(true);
+}
+
+
+//---------------------------------------------------------------------
+{   N = 1000000;
+
+    sum: &int := 0;
+
+    for (n: &int := 1; n < N; n += 2)
+    {
+        if (check_palindrome(n, 10)  &&  check_palindrome(n, 2))
+        {
+            sum += n;
+
+//          printf("%d\n", n);
+        }
+    }
+
+    printf("sum: %d\n", sum);
+}
+
+

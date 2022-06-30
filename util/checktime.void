@@ -18,13 +18,9 @@ checktime: (f: *()->void, n: int) -> float(64)
 
     t0 = my_timestamp();
 
-    loop
+    for (; i < n; ++i)
     {
-        if (i >= n) v_break();
-
         f();
-
-        ++i;
     }
 
     t1 = my_timestamp();

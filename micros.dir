@@ -71,6 +71,8 @@
                                                                │
  035  Circular primes                                          │0035_Circular_primes/micros.dir
                                                                │
+ 036  Double-base palindromes                                  │0036_Double-base_palindromes/micros.dir
+                                                               │
                                                                │
 ───────────────────────────────────────────────────────────────│
 Utility...                                                     │util/micros.dir
