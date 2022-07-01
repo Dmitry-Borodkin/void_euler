@@ -79,6 +79,8 @@
                                                                │
  039  Integer right triangles                                  │0039_Integer_right_triangles/micros.dir
                                                                │
+ 040  Champernowne's constant                                  │0040_Champernownes_constant/micros.dir
+                                                               │
                                                                │
 ───────────────────────────────────────────────────────────────│
 Utility...                                                     │util/micros.dir
