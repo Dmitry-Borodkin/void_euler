@@ -1,0 +1,59 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+check: (n: int) -> int
+{
+    D: &bool[10] := 0;
+
+    D[0] := true;
+
+    C: &int := 9;
+
+    R: &int := 0;
+
+    for (m: &int := 1; C; ++m)
+    {
+        p = n * m;
+
+        for (pp: &int := p; pp; pp /= 10)
+        {
+            d = pp % 10;
+
+            if (D[d]) v_return(0);      //- fail
+
+            D[d] := true;
+
+            --C;
+
+            R *= 10;
+        }
+
+        R += p;
+    }
+
+    v_return(R);
+}
+
+
+//---------------------------------------------------------------------
+{
+    res: &int := 0;
+
+    for (n: &int := 1; n < 10000; ++n)
+    {
+        if (r = check(n))
+        {
+            if (res < r)  res := r;
+
+//          printf("%d\n", r);
+        }
+    }
+
+    printf("res: %d\n", res);
+}
+
+

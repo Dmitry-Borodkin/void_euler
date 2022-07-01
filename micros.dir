@@ -73,6 +73,12 @@
                                                                │
  036  Double-base palindromes                                  │0036_Double-base_palindromes/micros.dir
                                                                │
+ 037  Truncatable primes                                       │0037_Truncatable_primes/micros.dir
+                                                               │
+ 038  Pandigital multiples                                     │0038_Pandigital_multiples/micros.dir
+                                                               │
+ 039  Integer right triangles                                  │0039_Integer_right_triangles/micros.dir
+                                                               │
                                                                │
 ───────────────────────────────────────────────────────────────│
 Utility...                                                     │util/micros.dir

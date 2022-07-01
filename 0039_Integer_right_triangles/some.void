@@ -1,0 +1,59 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+check: (p: int) -> int
+{
+    pa = p / 3;
+
+    s: &int := 0;
+
+    for (a: &int := 1; a < pa; ++a)
+    {
+        for (b: &int := a + 1; b < p; ++b)
+        {
+            c = p - (a + b);
+
+            if (c <= 0) v_break();
+
+            if (a*a + b*b == c*c)
+            {
+                ++s;
+
+//              printf("a: %d, b: %d, c: %d\n", a, b, c);
+            }
+        }
+    }
+
+    v_return(s);
+}
+
+
+//---------------------------------------------------------------------
+{   P = 1000;
+
+    ms: &int := 0;
+    mp: &int := 0;
+
+    for (p: &int := 1+2+3; p <= P; p += 2)
+    {
+        s = check(p);
+
+        if (s == 0) v_continue();
+
+//      printf("check(%d): %d\n", p, s);
+
+        if (ms < s)
+        {
+            ms := s;
+            mp := p;
+        }
+    }
+
+    printf("%d (%d)\n", mp, ms);
+}
+
+
