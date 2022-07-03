@@ -5,6 +5,11 @@
 
 
 //---------------------------------------------------------------------
+sqrt: (float(64)) -> float(64);
+ceil: (float(64)) -> float(64);
+
+
+//---------------------------------------------------------------------
 P = 15000;
 
 
@@ -17,22 +22,20 @@ pcount: &int := 0;
 
     memset(sieve, 0, P);
 
+    sieve[2] := true;
+
     for (i: &int := 3; i < P; i += 2)
     {
         sieve[i] := true;
     }
 
-    sieve[2] := true;
-
-    k: &int := v_undef();
-
-    for (i: &int := 3; i < P; ++i)
+    for (i: &int := 3; i < P; i += 2)       //- Sic!
     {
         if (sieve[i])
         {
             ++pcount;
 
-            for (k: &int := 2*i; k < P; k += i)
+            for (k: &int := i*i, i2 = 2*i; k < P; k += i2)
             {
                 sieve[k] := false;
             }
@@ -97,7 +100,7 @@ primes: &*int := v_undef();
         }
     }
 
-    printf("%d %d\n", abmax, nmax);
+    printf("%d (%d)\n", abmax, nmax);
 }
 
 

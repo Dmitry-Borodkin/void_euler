@@ -5,6 +5,9 @@
 
 
 //---------------------------------------------------------------------
+sqrt: (float(64)) -> float(64);
+ceil: (float(64)) -> float(64);
+
 log: (float(64)) -> float(64);
 
 
@@ -26,18 +29,20 @@ sieve: &*bool := v_undef();
 
     memset(sieve, 0, S);
 
+    sieve[2] := true;
+
     for (i: &int := 3; i < S; i += 2)
     {
         sieve[i] := true;
     }
 
-    sieve[2] := true;
+    R = (ceil(sqrt(S)) : int);
 
-    for (i: &int := 3; i < S; i += 2)
+    for (i: &int := 3; i < R; i += 2)
     {
         if (sieve[i])
         {
-            for (k: &int := 2*i; k < S; k += i)
+            for (k: &int := i*i, i2 = 2*i; k < S; k += i2)
             {
                 sieve[k] := false;
             }

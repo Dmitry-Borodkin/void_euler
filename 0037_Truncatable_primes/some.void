@@ -5,6 +5,11 @@
 
 
 //---------------------------------------------------------------------
+sqrt: (float(64)) -> float(64);
+ceil: (float(64)) -> float(64);
+
+
+//---------------------------------------------------------------------
 N = 1000000;
 
 
@@ -15,18 +20,20 @@ sieve: &*bool := v_undef();
 
     memset(sieve, 0, N);
 
+    sieve[2] := true;
+
     for (i: &int := 3; i < N; i += 2)
     {
         sieve[i] := true;
     }
 
-    sieve[2] := true;
+    R = (ceil(sqrt(N)) : int);
 
-    for (i: &int := 3; i < N; i += 2)
+    for (i: &int := 3; i < R; i += 2)
     {
         if (sieve[i])
         {
-            for (k: &int := 2*i; k < N; k += i)
+            for (k: &int := i*i, i2 = 2*i; k < N; k += i2)
             {
                 sieve[k] := false;
             }
