@@ -1,0 +1,47 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+WMAX = 192 + 1;
+
+trnum: &bool[WMAX] := 0;
+
+{   for (i: &int := 1, w: &int := 1; w < WMAX; w += ++i)
+    {
+        trnum[w] := true;
+    }
+}
+
+
+//---------------------------------------------------------------------
+{   f = v_fopen("words.txt", "rb");
+    defer fclose(f);
+
+    r: &int := 0;
+
+    w: &int := 0;
+
+    while(c = fgetc(f), c > 0)
+    {
+        if ('A' <= c <= 'Z')
+        {
+            w += c - ('A'-1);
+        }
+        else
+        {
+            if (w)
+            {
+                if (trnum[w]) ++r;
+
+                w := 0;
+            }
+        }
+    }
+
+    printf("%d\n", r);
+}
+
+
