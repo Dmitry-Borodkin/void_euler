@@ -91,7 +91,7 @@ name_score: (s: *const char) -> int
 
     //-----------------------------------------------------------------
     names = v_malloc(*const char, count);
-    defer v_mfree(names);
+    defer v_free(names);
 
     {   expr = v_alloca(v_ast_opaque_expr_sptr);
         v_initialize(expr);

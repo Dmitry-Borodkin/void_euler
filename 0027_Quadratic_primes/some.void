@@ -106,7 +106,7 @@ primes: &*int := v_undef();
 
 //---------------------------------------------------------------------
 {
-    v_mfree(primes);
-    v_mfree(sieve);
+    v_free(primes);
+    v_free(sieve);
 }
 

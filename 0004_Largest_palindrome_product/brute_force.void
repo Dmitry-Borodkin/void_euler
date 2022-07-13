@@ -52,6 +52,6 @@ palindromes: &*bool := v_undef();
 
 //---------------------------------------------------------------------
 {
-    v_mfree(palindromes);
+    v_free(palindromes);
 }
 

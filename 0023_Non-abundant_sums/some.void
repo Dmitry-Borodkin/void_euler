@@ -34,7 +34,7 @@ is_abundant: (n: int) -> bool
 {   N = 30000;
 
     f = v_malloc(int(8), N);
-    defer v_mfree(f);
+    defer v_free(f);
 
     memset(f, 0, N);
 
@@ -58,7 +58,7 @@ is_abundant: (n: int) -> bool
 
     //-----------------------------------------------------------------
     {   ab = v_malloc(int, c);
-        defer v_mfree(ab);
+        defer v_free(ab);
 
         i: &int := 0;
 

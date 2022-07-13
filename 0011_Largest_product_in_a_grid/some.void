@@ -122,6 +122,6 @@ pass: (dx: int, dy: int, x: int, y: int, sx: int, sy: int) -> int
 
 //---------------------------------------------------------------------
 {
-    v_mfree(data);
+    v_free(data);
 }
 
