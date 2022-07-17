@@ -8,4 +8,8 @@ Check time                                                     │checktime.void
 Imports                                                        │imports.void
                                                                │
                                                                │
+───────────────────────────────────────────────────────────────│
+clean                                                          │rm *.voidc*
+                                                               │
+void.doit                                                      │void.doit
                                                                │
