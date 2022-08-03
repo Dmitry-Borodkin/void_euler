@@ -30,7 +30,7 @@ name_score: (s: *const char) -> int
 
 //---------------------------------------------------------------------
 {
-    res = v_alloca(v_util_opaque_std_any);
+    res = v_alloca(v_std_any_t);
     v_initialize(res);
     defer v_terminate(res);
 
@@ -83,7 +83,7 @@ name_score: (s: *const char) -> int
     }
 
     //-----------------------------------------------------------------
-    plst = v_std_any_get_pointer(v_ast_opaque_expr_list_sptr, res);
+    plst = v_std_any_get_pointer(v_ast_expr_list_t, res);
 
     count = v_list_get_size(plst);
 
@@ -93,19 +93,15 @@ name_score: (s: *const char) -> int
     names = v_malloc(*const char, count);
     defer v_free(names);
 
-    {   expr = v_alloca(v_ast_opaque_expr_sptr);
-        v_initialize(expr);
-        defer v_terminate(expr);
+    for (i: &int := 0; i < count; ++i)
+    {
+        expr = v_list_get_item(plst, i);
 
-        for (i: &int := 0; i < count; ++i)
-        {
-            v_list_get_items(plst, i, expr);
+        names[i] := v_ast_expr_string_get_string(expr);
 
-            names[i] := v_ast_expr_string_get_string(expr);
-
-//          printf("%s\n", names[i]);
-        }
+//      printf("%s\n", names[i]);
     }
+
 
     //-----------------------------------------------------------------
     qsort(names, count, v_type_integer_get_width(intptr_t)/8, names_cmp);
