@@ -1,0 +1,74 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+N0: uint(64) =  123456789;
+N1: uint(64) = 9876543210;
+
+
+//---------------------------------------------------------------------
+is_pandigital: (p: uint(64)) -> bool
+{
+    D: &bool[10] := 0;
+
+    pp: &uint(64) := p;
+
+    for (i: &int := 0; i < 10; ++i)
+    {
+        d = pp % 10;
+
+        if (D[d])  v_return(false);     //- fail
+
+        D[d] := true;
+
+        pp /= 10;
+    }
+
+    for (i: &int := 0; i < 10; ++i)
+    {
+        if (!D[i])  v_return(false);
+    }
+
+//  printf("%lu\n", p);
+
+    v_return(true);
+}
+
+
+//---------------------------------------------------------------------
+primes: &int[] := {17, 13, 11, 7, 5, 3, 2, 0};
+
+check: (p: uint(64)) -> bool
+{
+    pp: &uint(64) := p;
+
+    for (i: &int := 0; primes[i]; ++i)
+    {
+        if ((pp%1000)%primes[i] != 0)  v_return(false);
+
+        pp /= 10;
+    }
+
+//  printf("%lu\n", p);
+
+    v_return(true);
+}
+
+
+//---------------------------------------------------------------------
+{
+    sum: &uint(64) := 0;
+
+    for (p: &int(64) := N0; p <= N1; ++p)
+    {
+//      if (is_pandigital(p) && check(p))  sum += p;
+        if (check(p) && is_pandigital(p))  sum += p;
+    }
+
+    printf("%lu\n", sum);
+}
+
+
