@@ -1,0 +1,90 @@
+{   v_import("imports.void");
+}
+
+{   enable_imports(); }
+
+
+//---------------------------------------------------------------------
+primes: &int[] := {17, 13, 11, 7, 5, 3, 2, 1, 0};
+
+D: &bool[10] := 0;
+
+P: &int[10] := v_undef();
+
+sum: &uint64_t := 0;
+
+
+//---------------------------------------------------------------------
+check: (pp: int, i: int) -> void
+{
+    pr = primes[i];
+
+    if (!pr)
+    {
+        p: &uint64_t := 0;
+
+        for (j: &int := 9; j >= 0; --j)
+        {
+            p *= 10;
+            p += P[j];
+        }
+
+//      printf("%lu\n", p);
+
+        sum += p;
+
+        v_return();
+    }
+
+    for (d: &int := 0; d < 10; ++d)
+    {
+        if (D[d])  v_continue();
+
+        dpp = d*100 + pp;
+
+        if (dpp % pr != 0)  v_continue();
+
+        D[d] := true;
+
+        P[i+2] := d;
+
+        check(dpp/10, i+1);
+
+        D[d] := false;
+    }
+}
+
+
+//---------------------------------------------------------------------
+{
+    for (p: &int := 0; p < 1000; p += primes[0])
+    {
+        D := 0;
+
+        pp: &uint64_t := p;
+
+        i: &int := 0;
+
+        for (; i < 3; ++i)
+        {
+            d = pp % 10;
+
+            if (D[d])  v_break();
+
+            D[d] := true;
+
+            P[i] := (d: int);
+
+            pp /= 10;
+        }
+
+        if (i != 3)  v_continue();
+
+        check(p/10, 1);
+    }
+
+    printf("%lu\n", sum);
+}
+
+
+

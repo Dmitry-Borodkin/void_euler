@@ -5,16 +5,16 @@
 
 
 //---------------------------------------------------------------------
-N0: uint(64) =  123456789;
-N1: uint(64) = 9876543210;
+N0: uint64_t =  123456789;
+N1: uint64_t = 9876543210;
 
 
 //---------------------------------------------------------------------
-is_pandigital: (p: uint(64)) -> bool
+is_pandigital: (p: uint64_t) -> bool
 {
     D: &bool[10] := 0;
 
-    pp: &uint(64) := p;
+    pp: &uint64_t := p;
 
     for (i: &int := 0; i < 10; ++i)
     {
@@ -32,7 +32,7 @@ is_pandigital: (p: uint(64)) -> bool
         if (!D[i])  v_return(false);
     }
 
-//  printf("%lu\n", p);
+    printf("%lu\n", p);
 
     v_return(true);
 }
@@ -41,9 +41,9 @@ is_pandigital: (p: uint(64)) -> bool
 //---------------------------------------------------------------------
 primes: &int[] := {17, 13, 11, 7, 5, 3, 2, 0};
 
-check: (p: uint(64)) -> bool
+check: (p: uint64_t) -> bool
 {
-    pp: &uint(64) := p;
+    pp: &uint64_t := p;
 
     for (i: &int := 0; primes[i]; ++i)
     {
@@ -60,9 +60,9 @@ check: (p: uint(64)) -> bool
 
 //---------------------------------------------------------------------
 {
-    sum: &uint(64) := 0;
+    sum: &uint64_t := 0;
 
-    for (p: &int(64) := N0; p <= N1; ++p)
+    for (p: &uint64_t := N0; p <= N1; ++p)
     {
 //      if (is_pandigital(p) && check(p))  sum += p;
         if (check(p) && is_pandigital(p))  sum += p;
