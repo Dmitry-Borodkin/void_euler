@@ -17,7 +17,7 @@ ceil: (float(64)) -> float(64);
 
 
 //---------------------------------------------------------------------
-sieve: &*bool := v_undef();
+sieve: &*bool := {};
 
 {   sieve := v_malloc(bool, N);
 

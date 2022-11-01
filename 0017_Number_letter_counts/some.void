@@ -7,9 +7,9 @@
 //---------------------------------------------------------------------
 print_10: (n: int) -> int
 {
-    r: &int := v_undef();
+    r: &int := {};
 
-    s: & *const char := v_undef();
+    s: & *const char := {};
 
     switch(n)
     {
@@ -39,9 +39,9 @@ print_20: (n: int) -> int
         v_return(r);
     }
 
-    r: &int := v_undef();
+    r: &int := {};
 
-    s: & *const char := v_undef();
+    s: & *const char := {};
 
     switch(n)
     {
@@ -73,9 +73,9 @@ print_100: (n: int) -> int
 
     d1 = n / 10;
 
-    r: &int := v_undef();
+    r: &int := {};
 
-    s: & *const char := v_undef();
+    s: & *const char := {};
 
     switch(d1)
     {

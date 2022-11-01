@@ -5,7 +5,7 @@
 
 
 //---------------------------------------------------------------------
-palindromes: &*bool := v_undef();
+palindromes: &*bool := {};
 
 {   palindromes := v_malloc(bool, 1000000);
 

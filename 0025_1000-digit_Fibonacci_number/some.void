@@ -25,7 +25,7 @@ pow_num_t: (a: num_t, n: unsigned) -> num_t
 
 
 //---------------------------------------------------------------------
-ten_pow_999: &num_t := v_undef();
+ten_pow_999: &num_t := {};
 
 {   ten_pow_999 := pow_num_t(10, 999);
 }

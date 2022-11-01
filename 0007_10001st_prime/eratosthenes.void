@@ -19,9 +19,9 @@ log: (float(64)) -> float(64);
 
 
 //---------------------------------------------------------------------
-S: &int := v_undef();
+S: &int := {};
 
-sieve: &*bool := v_undef();
+sieve: &*bool := {};
 
 {   S := (N*(log(N) + log(log(N))) : int) + 1;
 

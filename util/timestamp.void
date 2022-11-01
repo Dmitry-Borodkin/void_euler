@@ -5,7 +5,7 @@
 
 
 //---------------------------------------------------------------------
-my_source =
+my_source: &char[] :=
 """
 #include <time.h>
 
@@ -69,8 +69,7 @@ double my_timestamp(void)
 
     LLVMCreateMemoryBufferWithContentsOfFile(buffer, &mb, 0);
 
-    voidc_unit_load_object_file_to_jit(mb);
-    voidc_add_object_file_to_jit(mb);
+    voidc_unit_load_object_file_to_jit(mb, true);
 
     LLVMDisposeMemoryBuffer(mb);
 

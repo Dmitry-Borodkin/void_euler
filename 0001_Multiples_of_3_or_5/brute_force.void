@@ -21,8 +21,8 @@ brute_force: (N: long) -> long
 
 
 //---------------------------------------------------------------------
-N: &long := v_undef();
-R: &long := v_undef();
+N: &long := {};
+R: &long := {};
 
 doit: () -> void
 {

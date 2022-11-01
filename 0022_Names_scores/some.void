@@ -67,7 +67,7 @@ name_score: (s: *const char) -> int
         my_ctx    = ctx + 0;
         saved_ctx = ctx + 1;
 
-        cur_pos: &int := v_undef();
+        cur_pos: &int := {};
 
         v_peg_make_context(my_ctx, (fgetc: *((*void) -> int)), f, grm);
 

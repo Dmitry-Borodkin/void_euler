@@ -135,12 +135,12 @@ log: (double) -> double;
 
 
 //---------------------------------------------------------------------
-Sr5: &double := v_undef();
-phi: &double := v_undef();
+Sr5: &double := {};
+phi: &double := {};
 
-h: &double := v_undef();
+h: &double := {};
 
-log_phi: &double := v_undef();
+log_phi: &double := {};
 
 {   Sr5 := sqrt(5);
 
@@ -172,8 +172,8 @@ O_one: (N: num_t) -> num_t
 
 
 //---------------------------------------------------------------------
-N: &num_t := v_undef();
-R: &num_t := v_undef();
+N: &num_t := {};
+R: &num_t := {};
 
 doit: () -> void
 {
