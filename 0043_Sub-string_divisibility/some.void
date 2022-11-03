@@ -29,7 +29,7 @@ check: (pp: int, i: int) -> void
             p += P[j];
         }
 
-//      printf("%lu\n", p);
+//      printf("%llu\n", p);
 
         sum += p;
 
@@ -83,7 +83,7 @@ check: (pp: int, i: int) -> void
         check(p/10, 1);
     }
 
-    printf("%lu\n", sum);
+    printf("%llu\n", sum);
 }
 
 
