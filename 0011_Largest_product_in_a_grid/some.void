@@ -36,7 +36,7 @@ data_src: &(*const char)[SY] :=
 
 
 //---------------------------------------------------------------------
-data: & *int(8)[SX] := {};
+data: & *int(8)[SX] := v_undef();
 
 {   data := v_malloc(int(8)[SX], SY);
 
@@ -48,7 +48,7 @@ data: & *int(8)[SX] := {};
 
         for (x: &int := 0; x < SX; ++x)
         {
-            n: &int := {};
+            n: &int := v_undef();
 
             sscanf(src, "%d", &n);      //- ?
 

@@ -30,9 +30,9 @@ data_src: &(*const char)[N] :=
 
 
 //---------------------------------------------------------------------
-data: &int(8)[N*(N+1)/2] := {};
+data: &int(8)[N*(N+1)/2] := v_undef();
 
-line: &(*int(8))[N] := {};
+line: &(*int(8))[N] := v_undef();
 
 {
     line[0] := &data[0];
@@ -48,7 +48,7 @@ line: &(*int(8))[N] := {};
 
         d = line[i];
 
-        n: &int := {};
+        n: &int := v_undef();
 
         for (j: &int := 0; sscanf(s, "%d", &n) >= 0; ++j)
         {
