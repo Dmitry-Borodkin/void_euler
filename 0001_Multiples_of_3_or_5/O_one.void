@@ -7,7 +7,7 @@
 
 
 //---------------------------------------------------------------------
-sum: (K: long, N: long) -> long
+sum: (K: long, N: long) ~> long
 {
     p = (N - 1) / K;
 
@@ -16,7 +16,7 @@ sum: (K: long, N: long) -> long
 
 
 //---------------------------------------------------------------------
-O_one: (N: long) -> long
+O_one: (N: long) ~> long
 {
     ret = sum(3, N) + sum(5, N) - sum(15, N);
 
@@ -28,7 +28,7 @@ O_one: (N: long) -> long
 N: &long := v_undef();
 R: &long := v_undef();
 
-doit: () -> void
+doit: () ~> void
 {
     R := O_one(N);
 }

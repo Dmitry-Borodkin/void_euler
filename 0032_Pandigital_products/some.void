@@ -11,7 +11,7 @@ digits: &uint(8)[N] := 0;
 
 
 //---------------------------------------------------------------------
-pr_digits: () -> void
+pr_digits: () ~> void
 {
     for (j: &int := 0; j < N; ++j)
     {
@@ -23,7 +23,7 @@ pr_digits: () -> void
 
 
 //---------------------------------------------------------------------
-get_num: (p0: int, p1: int) -> int
+get_num: (p0: int, p1: int) ~> int
 {
     num: &int := 0;
 
@@ -41,7 +41,7 @@ old_p: &int := 0;
 
 sum: &int := 0;
 
-check: () -> void
+check: () ~> void
 {
 //  pr_digits();
 
@@ -71,7 +71,7 @@ check: () -> void
 
 
 //---------------------------------------------------------------------
-permut: (i: int, flags: int) -> void
+permut: (i: int, flags: int) ~> void
 {
     if (i == N)
     {

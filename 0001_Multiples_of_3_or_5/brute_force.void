@@ -7,7 +7,7 @@
 
 
 //---------------------------------------------------------------------
-brute_force: (N: long) -> long
+brute_force: (N: long) ~> long
 {
     sum: &long := 0;
 
@@ -24,7 +24,7 @@ brute_force: (N: long) -> long
 N: &long := v_undef();
 R: &long := v_undef();
 
-doit: () -> void
+doit: () ~> void
 {
     R := brute_force(N);
 }

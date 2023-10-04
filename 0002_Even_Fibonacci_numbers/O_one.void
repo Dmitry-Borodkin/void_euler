@@ -13,7 +13,7 @@ numSr5_t = vec(num_t, 2);
 
 
 //---------------------------------------------------------------------
-mulSr5: (a: numSr5_t, b: numSr5_t) -> numSr5_t
+mulSr5: (a: numSr5_t, b: numSr5_t) ~> numSr5_t
 {
     r0 = a[0]*b[0] + 5*a[1]*b[1];
 
@@ -22,7 +22,7 @@ mulSr5: (a: numSr5_t, b: numSr5_t) -> numSr5_t
     v_return({r0, r1});
 }
 
-divSr5: (a: numSr5_t, b: numSr5_t) -> numSr5_t
+divSr5: (a: numSr5_t, b: numSr5_t) ~> numSr5_t
 {
     num = mulSr5(a, {b[0], -b[1]});
 
@@ -42,7 +42,7 @@ dpsiSr5: numSr5_t = {1,-1};
 
 
 //---------------------------------------------------------------------
-powSr5: (a: numSr5_t, n: unsigned) -> numSr5_t
+powSr5: (a: numSr5_t, n: unsigned) ~> numSr5_t
 {
     if (n == 0) v_return(oneSr5);
     if (n == 1) v_return(a);
@@ -58,7 +58,7 @@ powSr5: (a: numSr5_t, n: unsigned) -> numSr5_t
 
 
 //---------------------------------------------------------------------
-//fib: (n: unsigned) -> num_t
+//fib: (n: unsigned) ~> num_t
 //{
 //    ph_n = powSr5(dphiSr5, n);
 //    ps_n = powSr5(dpsiSr5, n);
@@ -85,7 +85,7 @@ powSr5: (a: numSr5_t, n: unsigned) -> numSr5_t
 
 
 //---------------------------------------------------------------------
-sumGpSr5: (qn: numSr5_t, qd: num_t, n: unsigned) -> numSr5_t
+sumGpSr5: (qn: numSr5_t, qd: num_t, n: unsigned) ~> numSr5_t
 {
     num = powSr5(qn, n+1) - oneSr5*(qd << (n+1));
 
@@ -116,9 +116,9 @@ sumGpSr5: (qn: numSr5_t, qd: num_t, n: unsigned) -> numSr5_t
 //---------------------------------------------------------------------
 double = float(64);
 
-sqrt: (double) -> double;
+sqrt: (double) ~> double;
 
-log: (double) -> double;
+log: (double) ~> double;
 
 //{
 //    phi = (1 + sqrt(5)) / 2;
@@ -151,7 +151,7 @@ log_phi: &double := v_undef();
     log_phi := log(phi);
 }
 
-O_one: (N: num_t) -> num_t
+O_one: (N: num_t) ~> num_t
 {
     P = log(N*Sr5 + h) / log_phi;
 
@@ -175,7 +175,7 @@ O_one: (N: num_t) -> num_t
 N: &num_t := v_undef();
 R: &num_t := v_undef();
 
-doit: () -> void
+doit: () ~> void
 {
     R := O_one(N);
 }

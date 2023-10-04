@@ -15,7 +15,7 @@ sum: &uint64_t := 0;
 
 
 //---------------------------------------------------------------------
-check: (pp: int, i: int) -> void
+check: (pp: int, i: int) ~> void
 {
     pr = primes[i];
 

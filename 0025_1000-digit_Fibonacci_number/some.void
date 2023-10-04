@@ -9,7 +9,7 @@ num_t = uint(3322);         //- kinda  1000 * ln(10) / ln(2) ...
 
 
 //---------------------------------------------------------------------
-pow_num_t: (a: num_t, n: unsigned) -> num_t
+pow_num_t: (a: num_t, n: unsigned) ~> num_t
 {
     if (n == 0) v_return(1);
     if (n == 1) v_return(a);

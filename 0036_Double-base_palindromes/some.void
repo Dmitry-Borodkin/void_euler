@@ -5,7 +5,7 @@
 
 
 //---------------------------------------------------------------------
-check_palindrome: (n: int, b: int) -> bool
+check_palindrome: (n: int, b: int) ~> bool
 {
     d: &int(8)[32] := v_undef();
 

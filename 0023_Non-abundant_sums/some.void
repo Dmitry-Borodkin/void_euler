@@ -5,7 +5,7 @@
 
 
 //---------------------------------------------------------------------
-sum_proper_divisors: (n: int) -> int
+sum_proper_divisors: (n: int) ~> int
 {
     s: &int := 1;
 
@@ -24,7 +24,7 @@ sum_proper_divisors: (n: int) -> int
 
 
 //---------------------------------------------------------------------
-is_abundant: (n: int) -> bool
+is_abundant: (n: int) ~> bool
 {
     v_return(n < sum_proper_divisors(n));
 }

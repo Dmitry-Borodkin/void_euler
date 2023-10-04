@@ -1,6 +1,4 @@
-{   v_export_import("level-00");
-    v_export_import("level-01");
-    v_export_import("level-02");
+{   v_export_import("mainline.void");
 
     v_export_import("llvm-c/Core.void");
 }
@@ -9,8 +7,7 @@
 }
 
 //---------------------------------------------------------------------
-{   v_enable_level_01();
-    v_enable_level_02();
+{   v_enable_mainline();
 }
 
 {   v_set_export_flag(true); }
@@ -21,10 +18,9 @@
 
 
 //---------------------------------------------------------------------
-enable_imports: () -> void
+enable_imports: () ~> void
 {
-    v_enable_level_01();
-    v_enable_level_02();
+    v_enable_mainline();
 }
 
 
@@ -63,50 +59,50 @@ enable_imports: () -> void
     }
 }
 
-v_fopen: (filename: *const char, mode: *const char) -> *FILE;       //- Sic!
+v_fopen: (filename: *const char, mode: *const char) ~> *FILE;       //- Sic!
 
-fwrite: (buf: *const void, size: size_t, count: size_t, stream: *FILE) -> size_t;
+fwrite: (buf: *const void, size: size_t, count: size_t, stream: *FILE) ~> size_t;
 
-fclose: (stream: *FILE) -> int;
+fclose: (stream: *FILE) ~> int;
 
-fflush: (*FILE) -> int;
+fflush: (*FILE) ~> int;
 
 stdout: &*FILE;
 stderr: &*FILE;
 
 
 //---------------------------------------------------------------------
-fputs: (buf: *const char, stream: *FILE) -> int;
+fputs: (buf: *const char, stream: *FILE) ~> int;
 
-fprintf: (stream: *FILE, format: *const char, ...) -> int;
+fprintf: (stream: *FILE, format: *const char, ...) ~> int;
 
-sprintf: (str: *char, format: *const char, ...) -> int;
-
-
-//---------------------------------------------------------------------
-fgetc: (stream: *FILE) -> int;
-
-fscanf: (stream: *FILE, format: *const char, ...) -> int;
-
-sscanf: (buf: *const char, format: *const char, ...) -> int;
+sprintf: (str: *char, format: *const char, ...) ~> int;
 
 
 //---------------------------------------------------------------------
-qsort: (ptr: *void, count: size_t, size: size_t, comp: *((*const void, *const void) -> int)) -> void;
+fgetc: (stream: *FILE) ~> int;
 
-strcmp: (*const char, *const char) -> int;
+fscanf: (stream: *FILE, format: *const char, ...) ~> int;
 
-
-//---------------------------------------------------------------------
-exit: (status: int) -> void;
+sscanf: (buf: *const char, format: *const char, ...) ~> int;
 
 
 //---------------------------------------------------------------------
-memset: (s: *void, c: int, n: size_t) -> *void;
+qsort: (ptr: *void, count: size_t, size: size_t, comp: *((*const void, *const void) ~> int)) ~> void;
 
-memcpy: (d: *void, s: *const void, n: size_t) -> *void;
+strcmp: (*const char, *const char) ~> int;
 
-memcmp: (s1: *const void, s2: *const void, n: size_t) -> int;
+
+//---------------------------------------------------------------------
+exit: (status: int) ~> void;
+
+
+//---------------------------------------------------------------------
+memset: (s: *void, c: int, n: size_t) ~> *void;
+
+memcpy: (d: *void, s: *const void, n: size_t) ~> *void;
+
+memcmp: (s1: *const void, s2: *const void, n: size_t) ~> int;
 
 
 //---------------------------------------------------------------------

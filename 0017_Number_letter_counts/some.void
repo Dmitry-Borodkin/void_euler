@@ -5,7 +5,7 @@
 
 
 //---------------------------------------------------------------------
-print_10: (n: int) -> int
+print_10: (n: int) ~> int
 {
     r: &int := v_undef();
 
@@ -30,7 +30,7 @@ print_10: (n: int) -> int
     v_return(r);
 }
 
-print_20: (n: int) -> int
+print_20: (n: int) ~> int
 {
     if (0 < n < 10)
     {
@@ -62,7 +62,7 @@ print_20: (n: int) -> int
     v_return(r);
 }
 
-print_100: (n: int) -> int
+print_100: (n: int) ~> int
 {
     if (0 < n < 20)
     {
@@ -102,7 +102,7 @@ print_100: (n: int) -> int
     v_return(r);
 }
 
-print_1000: (n: int) -> int
+print_1000: (n: int) ~> int
 {
     if (0 < n < 100)
     {
@@ -130,7 +130,7 @@ print_1000: (n: int) -> int
 
 
 //---------------------------------------------------------------------
-print_numeral: (n: int) -> int
+print_numeral: (n: int) ~> int
 {
     if (!(0 < n <= 1000))
     {

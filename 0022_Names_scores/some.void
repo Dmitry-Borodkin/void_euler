@@ -5,7 +5,7 @@
 
 
 //---------------------------------------------------------------------
-names_cmp: (l: *const void, r: *const void) -> int
+names_cmp: (l: *const void, r: *const void) ~> int
 {
     ls = *(l: *const *const char);
     rs = *(r: *const *const char);
@@ -15,7 +15,7 @@ names_cmp: (l: *const void, r: *const void) -> int
 
 
 //---------------------------------------------------------------------
-name_score: (s: *const char) -> int
+name_score: (s: *const char) ~> int
 {
     r: &int := 0;
 
@@ -69,7 +69,7 @@ name_score: (s: *const char) -> int
 
         cur_pos: &int := v_undef();
 
-        v_peg_make_context(my_ctx, (fgetc: *((*void) -> int)), f, grm);
+        v_peg_make_context(my_ctx, (fgetc: *((*void) ~> int)), f, grm);
 
         //-------------------------------------------------------------
         v_peg_get_context(saved_ctx);

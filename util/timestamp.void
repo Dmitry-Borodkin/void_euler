@@ -83,6 +83,6 @@ double my_timestamp(void)
 
 //---------------------------------------------------------------------
 export
-my_timestamp: () -> float(64);
+my_timestamp: () ~> float(64);
 
 

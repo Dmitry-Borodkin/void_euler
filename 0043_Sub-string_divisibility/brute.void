@@ -10,7 +10,7 @@ N1: uint64_t = 9876543210;
 
 
 //---------------------------------------------------------------------
-is_pandigital: (p: uint64_t) -> bool
+is_pandigital: (p: uint64_t) ~> bool
 {
     D: &bool[10] := 0;
 
@@ -41,7 +41,7 @@ is_pandigital: (p: uint64_t) -> bool
 //---------------------------------------------------------------------
 primes: &int[] := {17, 13, 11, 7, 5, 3, 2, 0};
 
-check: (p: uint64_t) -> bool
+check: (p: uint64_t) ~> bool
 {
     pp: &uint64_t := p;
 

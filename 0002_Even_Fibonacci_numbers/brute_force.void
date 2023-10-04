@@ -11,7 +11,7 @@ num_t = int(128);
 
 
 //---------------------------------------------------------------------
-brute_force: (N: num_t) -> num_t
+brute_force: (N: num_t) ~> num_t
 {
     sum: &num_t := 0;
 
@@ -33,7 +33,7 @@ brute_force: (N: num_t) -> num_t
 N: &num_t := v_undef();
 R: &num_t := v_undef();
 
-doit: () -> void
+doit: () ~> void
 {
     R := brute_force(N);
 }

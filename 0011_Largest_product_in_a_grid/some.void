@@ -61,7 +61,7 @@ data: & *int(8)[SX] := v_undef();
 
 
 //---------------------------------------------------------------------
-prod4: (dx: int, dy: int, x: int, y: int) -> int
+prod4: (dx: int, dy: int, x: int, y: int) ~> int
 {
     ix: &int := x;
     iy: &int := y;
@@ -87,7 +87,7 @@ prod4: (dx: int, dy: int, x: int, y: int) -> int
 //---------------------------------------------------------------------
 maxprod: &int := 0;
 
-pass: (dx: int, dy: int, x: int, y: int, sx: int, sy: int) -> int
+pass: (dx: int, dy: int, x: int, y: int, sx: int, sy: int) ~> int
 {
     iy: &int := y;
 
