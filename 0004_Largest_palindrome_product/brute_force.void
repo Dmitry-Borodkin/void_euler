@@ -5,11 +5,11 @@
 
 
 //---------------------------------------------------------------------
-palindromes: &*bool := v_undef();
+S = 1000000;
 
-{   palindromes := v_malloc(bool, 1000000);
+palindromes = new bool[S];      defer delete[] palindromes;
 
-    memset(palindromes, 0, 1000000);
+{   memset(palindromes, 0, S);
 
     for (n: &int := 999; n >= 100; --n)
     {
@@ -49,9 +49,4 @@ palindromes: &*bool := v_undef();
     printf("maxprod: %d\n", maxprod);
 }
 
-
-//---------------------------------------------------------------------
-{
-    v_free(palindromes);
-}
 

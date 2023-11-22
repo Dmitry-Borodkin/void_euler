@@ -30,17 +30,13 @@ name_score: (s: *const char) ~> int
 
 //---------------------------------------------------------------------
 {
-    res = v_alloca(v_std_any_t);
-    v_initialize(res);
-    defer v_terminate(res);
+    res: &v_std_any_t := {};        res = &res;
 
     {   f = v_fopen("names.txt", "rb");
         defer fclose(f);
 
         //-------------------------------------------------------------
-        grm = v_alloca(v_peg_grammar_t);
-        v_initialize(grm);
-        defer v_terminate(grm);
+        grm: &v_peg_grammar_t := {};        grm = &grm;
 
         v_peg_get_grammar(grm);
 
@@ -60,9 +56,7 @@ name_score: (s: *const char) ~> int
         }
 
         //-------------------------------------------------------------
-        ctx = v_alloca(v_peg_context_t, 2);
-        v_initialize(ctx, 2);
-        defer v_terminate(ctx, 2);
+        ctx: &v_peg_context_t[2] := {};
 
         my_ctx    = ctx + 0;
         saved_ctx = ctx + 1;
@@ -90,8 +84,8 @@ name_score: (s: *const char) ~> int
 //  printf("count: %lu\n", count);
 
     //-----------------------------------------------------------------
-    names = v_malloc(*const char, count);
-    defer v_free(names);
+    names = new (*const char)[count];
+    defer delete[] names;
 
     for (i: &int := 0; i < count; ++i)
     {

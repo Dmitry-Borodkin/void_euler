@@ -36,11 +36,9 @@ data_src: &(*const char)[SY] :=
 
 
 //---------------------------------------------------------------------
-data: & *int(8)[SX] := v_undef();
+data = new int(8)[SY][SX];      defer delete[] data;
 
-{   data := v_malloc(int(8)[SX], SY);
-
-    for (y: &int := 0; y < SY; ++y)
+{   for (y: &int := 0; y < SY; ++y)
     {
         src: & *const char := data_src[y];
 
@@ -119,9 +117,4 @@ pass: (dx: int, dy: int, x: int, y: int, sx: int, sy: int) ~> int
     printf("%d\n", maxprod);
 }
 
-
-//---------------------------------------------------------------------
-{
-    v_free(data);
-}
 

@@ -14,11 +14,9 @@ N = 1000000;
 
 
 //---------------------------------------------------------------------
-sieve: &*bool := v_undef();
+sieve = new bool[N];        defer delete[] sieve;
 
-{   sieve := v_malloc(bool, N);
-
-    memset(sieve, 0, N);
+{   memset(sieve, 0, N);
 
     sieve[2] := true;
 
@@ -101,12 +99,6 @@ check_order: (n: int) ~> int
     }
 
     printf("sum: %d\n", s);
-}
-
-
-//---------------------------------------------------------------------
-{
-    v_free(sieve);
 }
 
 

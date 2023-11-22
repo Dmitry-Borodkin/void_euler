@@ -12,8 +12,8 @@
 
     L = 160;    //- ?
 
-    D = v_malloc(int(8) , L);
-    defer v_free(D);
+    D = new int(8)[L];
+    defer delete[] D;
 
     memset(D, 0, L);
 

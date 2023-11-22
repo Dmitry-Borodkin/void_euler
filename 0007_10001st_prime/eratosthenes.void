@@ -5,10 +5,11 @@
 
 
 //---------------------------------------------------------------------
-sqrt: (float(64)) ~> float(64);
-ceil: (float(64)) ~> float(64);
+double = float(64);
 
-log: (float(64)) ~> float(64);
+sqrt: (double) ~> double;
+ceil: (double) ~> double;
+log:  (double) ~> double;
 
 
 //---------------------------------------------------------------------
@@ -17,17 +18,13 @@ log: (float(64)) ~> float(64);
 
 {   printf("N: %d\n", N); }
 
+S = (N*(log(N) + log(log(N))) : int) + 1;
+
+sieve = new bool[S];        defer delete[] sieve;
+
 
 //---------------------------------------------------------------------
-S: &int := v_undef();
-
-sieve: &*bool := v_undef();
-
-{   S := (N*(log(N) + log(log(N))) : int) + 1;
-
-    sieve := v_malloc(bool, S);
-
-    memset(sieve, 0, S);
+{   memset(sieve, 0, S);
 
     sieve[2] := true;
 
@@ -71,9 +68,4 @@ sieve: &*bool := v_undef();
     else        printf("Not found\n");
 }
 
-
-//---------------------------------------------------------------------
-{
-    v_free(sieve);
-}
 

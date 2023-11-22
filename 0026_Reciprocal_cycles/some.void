@@ -7,8 +7,8 @@
 //---------------------------------------------------------------------
 {   N = 1000;
 
-    D = v_malloc(int(32), N);
-    defer v_free(D);
+    D = new int(32)[N];
+    defer delete[] D;
 
     pmax: &int := 0;
     nmax: &int := 0;

@@ -33,11 +33,9 @@ data_src: &(*const char)[20] :=
 //---------------------------------------------------------------------
 S = 1000;
 
-data: &*int(8) := v_undef();
+data = new int(8)[S];       defer delete[] data;
 
-{   data := v_malloc(int(8), S);
-
-    dst: & *int(8) := data;
+{   dst: & *int(8) := data;
 
     for (r: &int := 0; r < 20; ++r)
     {
@@ -75,9 +73,4 @@ data: &*int(8) := v_undef();
     printf("R: %lld\n", maxprod);
 }
 
-
-//---------------------------------------------------------------------
-{
-    v_free(data);
-}
 

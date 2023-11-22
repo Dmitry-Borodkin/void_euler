@@ -14,13 +14,11 @@ P = 15000;
 
 
 //---------------------------------------------------------------------
-sieve: &*bool := v_undef();
+sieve = new bool[P];        defer delete[] sieve;
 
 pcount: &int := 0;
 
-{   sieve := v_malloc(bool, P);
-
-    memset(sieve, 0, P);
+{   memset(sieve, 0, P);
 
     sieve[2] := true;
 
@@ -44,11 +42,9 @@ pcount: &int := 0;
 }
 
 //---------------------------------------------------------------------
-primes: &*int := v_undef();
+primes = new int[pcount];       defer delete[] primes;
 
-{   primes := v_malloc(int, pcount);
-
-    i: &int := 0;
+{   i: &int := 0;
 
     for (p: &int := 3; p < P; p += 2)
     {
@@ -103,10 +99,4 @@ primes: &*int := v_undef();
     printf("%d (%d)\n", abmax, nmax);
 }
 
-
-//---------------------------------------------------------------------
-{
-    v_free(primes);
-    v_free(sieve);
-}
 

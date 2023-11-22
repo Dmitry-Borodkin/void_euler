@@ -32,8 +32,8 @@ double my_timestamp(void)
 //---------------------------------------------------------------------
 {   buflen = 1024;
 
-    buffer = v_malloc(char, buflen);
-    defer v_free(buffer);
+    buffer = new char[buflen];
+    defer delete[] buffer;
 
     {   p = popen("mktemp", "r");
         defer pclose(p);
