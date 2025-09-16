@@ -24,7 +24,7 @@ log: (float(64)) ~> float(64);
             {
                 if (b > 2)  printf("\n");
 
-                v_break();
+                break;
             }
 
             printf("%d^%d ", a, b);

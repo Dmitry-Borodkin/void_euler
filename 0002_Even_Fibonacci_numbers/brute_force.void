@@ -25,13 +25,13 @@ brute_force: (N: num_t) ~> num_t
         }
     }
 
-    v_return(sum);
+    return  sum;
 }
 
 
 //---------------------------------------------------------------------
-N: &num_t := v_undef();
-R: &num_t := v_undef();
+N: &num_t := undef;
+R: &num_t := undef;
 
 doit: () ~> void
 {

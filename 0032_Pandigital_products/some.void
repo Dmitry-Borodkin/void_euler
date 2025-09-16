@@ -32,7 +32,7 @@ get_num: (p0: int, p1: int) ~> int
         num := 10*num + digits[p] + 1;
     }
 
-    v_return(num);
+    return  num;
 }
 
 
@@ -77,7 +77,7 @@ permut: (i: int, flags: int) ~> void
     {
         check();
 
-        v_return();
+        return;
     }
 
     for (k: &int := 0; k < N; ++k)

@@ -13,21 +13,18 @@ sum_proper_divisors: (n: int) ~> int
     {
         i2 = i * i;
 
-        if (i2 == n)  v_return(s + i);
-        if (i2 > n)   v_return(s);
+        if (i2 == n)  return  s + i;
+        if (i2 > n)   return  s;
 
         if (n%i == 0) s += i + n/i;
     }
 
-    v_return(s);    //- ?
+    return  s;      //- ?
 }
 
 
 //---------------------------------------------------------------------
-is_abundant: (n: int) ~> bool
-{
-    v_return(n < sum_proper_divisors(n));
-}
+is_abundant: (n: int) ~> bool  =  n < sum_proper_divisors(n);
 
 
 //---------------------------------------------------------------------
@@ -38,8 +35,8 @@ is_abundant: (n: int) ~> bool
 
     memset(f, 0, N);
 
-    f_abundant = 1 << 0;
-    f_sum2abs  = 1 << 1;
+    f_abundant = (1 << 0 : int(8));
+    f_sum2abs  = (1 << 1 : int(8));
 
     //-----------------------------------------------------------------
     c: &int := 0;
@@ -74,7 +71,7 @@ is_abundant: (n: int) ~> bool
             {
                 num = ab[i] + ab[j];
 
-                if (num >= N) v_break();
+                if (num >= N) break;
 
                 f[num] |= f_sum2abs;
             }

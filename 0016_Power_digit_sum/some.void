@@ -30,7 +30,7 @@ log: (float(64)) ~> float(64);
     {
         for (i: &int := 0; ; ++i)
         {
-            if (l < i  &&  c == 0  &&  D[i] == 0) v_break();
+            if (l < i  &&  c == 0  &&  D[i] == 0) break;
 
             dd = 2*D[i] + c;
 

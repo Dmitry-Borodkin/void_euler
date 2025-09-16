@@ -13,13 +13,13 @@ count_divisors: (n: int) ~> int
     {
         i2 = i * i;
 
-        if (i2 == n)  v_return(2*c + 1);
-        if (i2 > n)   v_return(2*c);
+        if (i2 == n)  return 2*c + 1;
+        if (i2 > n)   return 2*c;
 
         if (n%i == 0) ++c;
     }
 
-    v_return(c);    //- ?
+    return  c;      //- ?
 }
 
 
@@ -37,7 +37,7 @@ count_divisors: (n: int) ~> int
         {
             printf("%d: %d\n", m, c);
 
-            v_break();
+            break;
         }
 
 //      printf("%d: %d\n", m, c);

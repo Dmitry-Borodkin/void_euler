@@ -26,7 +26,7 @@
     {
         for (i: &int := 0; ; ++i)
         {
-            if (l < i  &&  c == 0  &&  D[i] == 0) v_break();
+            if (l < i  &&  c == 0  &&  D[i] == 0) break;
 
             dd = n*D[i] + c;
 

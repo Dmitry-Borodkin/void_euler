@@ -65,7 +65,7 @@ sieve: &bool[S] := 0;
         {
             printf("Found: %d\n", (N: int));
 
-            v_return();
+            return;
         }
     }
 

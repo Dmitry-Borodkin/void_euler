@@ -10,7 +10,7 @@ names_cmp: (l: *const void, r: *const void) ~> int
     ls = *(l: *const *const char);
     rs = *(r: *const *const char);
 
-    v_return(strcmp(ls, rs));
+    return  strcmp(ls, rs);
 }
 
 
@@ -24,7 +24,7 @@ name_score: (s: *const char) ~> int
         r += *sp - ('A' - 1);
     }
 
-    v_return(r);
+    return  r;
 }
 
 
@@ -36,9 +36,7 @@ name_score: (s: *const char) ~> int
         defer fclose(f);
 
         //-------------------------------------------------------------
-        grm: &v_peg_grammar_t := {};        grm = &grm;
-
-        v_peg_get_grammar(grm);
+        grm = v_peg_get_grammar();
 
         //-------------------------------------------------------------
         grammar grm
@@ -61,15 +59,17 @@ name_score: (s: *const char) ~> int
         my_ctx    = ctx + 0;
         saved_ctx = ctx + 1;
 
-        cur_pos: &int := v_undef();
+        cur_pos: &int := undef;
 
         v_peg_make_context(my_ctx, (fgetc: *((*void) ~> int)), f, grm);
 
         //-------------------------------------------------------------
-        v_peg_get_context(saved_ctx);
-        defer v_peg_set_context(saved_ctx);
+        the_ctx = v_peg_get_context();
 
-        v_peg_set_context(my_ctx);
+        v_copy(saved_ctx, the_ctx);
+        defer v_copy(the_ctx, saved_ctx);
+
+        v_copy(the_ctx, my_ctx);
 
         v_peg_parse(res, v_quark_from_string("name_list"));
 

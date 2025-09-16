@@ -11,7 +11,7 @@ res: (n: long) ~> long
 
     s = ((16*k + 30)*k + 26)*k/3 + 1;
 
-    v_return(s);
+    return  s;
 }
 
 

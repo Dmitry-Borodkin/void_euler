@@ -23,7 +23,7 @@ check: (n: int) ~> int
         {
             d = pp % 10;
 
-            if (D[d]) v_return(0);      //- fail
+            if (D[d]) return 0;         //- fail
 
             D[d] := true;
 
@@ -35,7 +35,7 @@ check: (n: int) ~> int
         R += p;
     }
 
-    v_return(R);
+    return  R;
 }
 
 

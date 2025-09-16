@@ -26,7 +26,7 @@ digit_fact: (n: int) ~> int
         s += F[nn%10];
     }
 
-    v_return(s);
+    return  s;
 }
 
 

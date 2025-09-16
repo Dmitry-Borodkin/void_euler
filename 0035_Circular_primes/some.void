@@ -54,12 +54,12 @@ check_circularity: (n: int, p: int) ~> bool
 
     for (i: &int := 0; i < n; ++i)
     {
-        if (!sieve[pp]) v_return(false);
+        if (!sieve[pp]) return false;
 
         pp := 10*(pp%order) + (pp/order);
     }
 
-    v_return(true);
+    return  true;
 }
 
 
@@ -85,7 +85,7 @@ check_order: (n: int) ~> int
         }
     }
 
-    v_return(s);
+    return  s;
 }
 
 

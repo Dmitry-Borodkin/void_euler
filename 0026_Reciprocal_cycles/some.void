@@ -40,7 +40,7 @@
 
 //              printf(" %d\n", p);
 
-                v_break();
+                break;
             }
 
             D[r] := i;

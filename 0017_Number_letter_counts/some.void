@@ -7,9 +7,9 @@
 //---------------------------------------------------------------------
 print_10: (n: int) ~> int
 {
-    r: &int := v_undef();
+    r: &int := undef;
 
-    s: & *const char := v_undef();
+    s: & *const char := undef;
 
     switch(n)
     {
@@ -27,7 +27,7 @@ print_10: (n: int) ~> int
 
     printf(s);
 
-    v_return(r);
+    return  r;
 }
 
 print_20: (n: int) ~> int
@@ -36,12 +36,12 @@ print_20: (n: int) ~> int
     {
         r = print_10(n);
 
-        v_return(r);
+        return  r;
     }
 
-    r: &int := v_undef();
+    r: &int := undef;
 
-    s: & *const char := v_undef();
+    s: & *const char := undef;
 
     switch(n)
     {
@@ -59,7 +59,7 @@ print_20: (n: int) ~> int
 
     printf(s);
 
-    v_return(r);
+    return  r;
 }
 
 print_100: (n: int) ~> int
@@ -68,14 +68,14 @@ print_100: (n: int) ~> int
     {
         r = print_20(n);
 
-        v_return(r);
+        return  r;
     }
 
     d1 = n / 10;
 
-    r: &int := v_undef();
+    r: &int := undef;
 
-    s: & *const char := v_undef();
+    s: & *const char := undef;
 
     switch(d1)
     {
@@ -93,13 +93,13 @@ print_100: (n: int) ~> int
 
     d0 = n % 10;
 
-    if (d0 == 0)  v_return(r);
+    if (d0 == 0)  return r;
 
     printf("-");
 
     r += print_10(d0);
 
-    v_return(r);
+    return  r;
 }
 
 print_1000: (n: int) ~> int
@@ -108,7 +108,7 @@ print_1000: (n: int) ~> int
     {
         r = print_100(n);
 
-        v_return(r);
+        return  r;
     }
 
     d2 = n / 100;
@@ -119,13 +119,13 @@ print_1000: (n: int) ~> int
 
     d10 = n % 100;
 
-    if (d10 == 0)  v_return(r);
+    if (d10 == 0)  return r;
 
     printf(" and ");
 
     r += 3 + print_100(d10);
 
-    v_return(r);
+    return  r;
 }
 
 
@@ -136,7 +136,7 @@ print_numeral: (n: int) ~> int
     {
         printf("Wrong input: %d\n", n);
 
-        v_return(-999999999);
+        return  -999999999;
     }
 
     r: &int := 3 + 8;
@@ -146,7 +146,7 @@ print_numeral: (n: int) ~> int
 
     printf("\n");
 
-    v_return(r);
+    return  r;
 }
 
 

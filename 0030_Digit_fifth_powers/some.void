@@ -16,7 +16,7 @@ N = 5;
 
     for (; ; ++m)
     {
-        if (m*pow(9, N) < pow(10, m)) v_break();
+        if (m*pow(9, N) < pow(10, m)) break;
     }
 
     lim = (m*pow(9, N) : int);

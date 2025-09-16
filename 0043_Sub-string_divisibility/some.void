@@ -33,16 +33,16 @@ check: (pp: int, i: int) ~> void
 
         sum += p;
 
-        v_return();
+        return;
     }
 
     for (d: &int := 0; d < 10; ++d)
     {
-        if (D[d])  v_continue();
+        if (D[d])  continue;
 
         dpp = d*100 + pp;
 
-        if (dpp % pr != 0)  v_continue();
+        if (dpp % pr != 0)  continue;
 
         D[d] := true;
 
@@ -69,7 +69,7 @@ check: (pp: int, i: int) ~> void
         {
             d = pp % 10;
 
-            if (D[d])  v_break();
+            if (D[d])  break;
 
             D[d] := true;
 
@@ -78,7 +78,7 @@ check: (pp: int, i: int) ~> void
             pp /= 10;
         }
 
-        if (i != 3)  v_continue();
+        if (i != 3)  continue;
 
         check(p/10, 1);
     }

@@ -11,22 +11,17 @@ sum: (K: long, N: long) ~> long
 {
     p = (N - 1) / K;
 
-    v_return(K*p*(p+1) / 2);
+    return  K*p*(p+1) / 2;
 }
 
 
 //---------------------------------------------------------------------
-O_one: (N: long) ~> long
-{
-    ret = sum(3, N) + sum(5, N) - sum(15, N);
-
-    v_return(ret);
-}
+O_one: (N: long) ~> long  =  sum(3, N) + sum(5, N) - sum(15, N);
 
 
 //---------------------------------------------------------------------
-N: &long := v_undef();
-R: &long := v_undef();
+N: &long := undef;
+R: &long := undef;
 
 doit: () ~> void
 {

@@ -45,7 +45,7 @@ check_to_left: (n: int) ~> bool
 {
     for (nn: &int := n; nn; nn /= 10)
     {
-        if (!sieve[nn]) v_return(false);
+        if (!sieve[nn]) return false;
     }
 
     v_return(true);
@@ -56,10 +56,10 @@ check_to_right: (n: int) ~> bool
 {
     for (M: &int := 10; M < n; M *= 10)
     {
-        if (!sieve[n % M])  v_return(false);
+        if (!sieve[n % M])  return false;
     }
 
-    v_return(true);
+    return  true;
 }
 
 

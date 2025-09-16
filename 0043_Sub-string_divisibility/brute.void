@@ -29,12 +29,12 @@ is_pandigital: (p: uint64_t) ~> bool
 
     for (i: &int := 0; i < 10; ++i)
     {
-        if (!D[i])  v_return(false);
+        if (!D[i])  return false;
     }
 
     printf("%lu\n", p);
 
-    v_return(true);
+    return  true;
 }
 
 
@@ -47,14 +47,14 @@ check: (p: uint64_t) ~> bool
 
     for (i: &int := 0; primes[i]; ++i)
     {
-        if ((pp%1000)%primes[i] != 0)  v_return(false);
+        if ((pp%1000)%primes[i] != 0)  return false;
 
         pp /= 10;
     }
 
 //  printf("%lu\n", p);
 
-    v_return(true);
+    return  true;
 }
 
 

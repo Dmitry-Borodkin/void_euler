@@ -16,13 +16,13 @@ brute_force: (N: long) ~> long
         if (i%3 == 0  ||  i%5 == 0) sum += i;
     }
 
-    v_return(sum);
+    return  sum;
 }
 
 
 //---------------------------------------------------------------------
-N: &long := v_undef();
-R: &long := v_undef();
+N: &long := undef;
+R: &long := undef;
 
 doit: () ~> void
 {

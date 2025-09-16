@@ -49,7 +49,7 @@ D: &int[10] := 0;
 
                 b[j] := true;
 
-                v_break();
+                break;
             }
         }
     }

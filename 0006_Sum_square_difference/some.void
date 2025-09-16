@@ -13,7 +13,7 @@ some: (n: int) ~> int
 
 //  printf("s1: %d, s2: %d\n", s1, s2);
 
-    v_return(s1*s1 - s2);
+    return  s1*s1 - s2;
 }
 
 

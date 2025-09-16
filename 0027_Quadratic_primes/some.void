@@ -61,13 +61,13 @@ primes = new int[pcount];       defer delete[] primes;
     {
         b = primes[bi];
 
-        if (b >= 1000) v_break();
+        if (b >= 1000) break;
 
         for (ai: &int := 0; ; ++ai)
         {
             a = primes[ai] - b - 1;
 
-            if (a >= 1000) v_break();
+            if (a >= 1000) break;
 
             n: &int := 2;       //- Sic!
 
@@ -79,10 +79,10 @@ primes = new int[pcount];       defer delete[] primes;
                 {
                     printf("got %d - abort!\n", p);
 
-                    v_return();
+                    return;
                 }
 
-                if (!sieve[p]) v_break();
+                if (!sieve[p]) break;
 
                 if (nmax < n)
                 {

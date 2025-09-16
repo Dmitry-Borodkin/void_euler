@@ -17,7 +17,7 @@ check: (p: int) ~> int
         {
             c = p - (a + b);
 
-            if (c <= 0) v_break();
+            if (c <= 0) break;
 
             if (a*a + b*b == c*c)
             {
@@ -28,7 +28,7 @@ check: (p: int) ~> int
         }
     }
 
-    v_return(s);
+    return  s;
 }
 
 
@@ -42,7 +42,7 @@ check: (p: int) ~> int
     {
         s = check(p);
 
-        if (s == 0) v_continue();
+        if (s == 0) continue;
 
 //      printf("check(%d): %d\n", p, s);
 

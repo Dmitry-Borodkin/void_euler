@@ -46,7 +46,7 @@ data = new int(8)[SY][SX];      defer delete[] data;
 
         for (x: &int := 0; x < SX; ++x)
         {
-            n: &int := v_undef();
+            n: &int := undef;
 
             sscanf(src, "%d", &n);      //- ?
 
@@ -78,7 +78,7 @@ prod4: (dx: int, dy: int, x: int, y: int) ~> int
 
 //  printf("%d\n", p);
 
-    v_return(p);
+    return  p;
 }
 
 

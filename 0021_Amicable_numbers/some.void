@@ -19,7 +19,7 @@ sum_proper_divisors: (n: int) ~> int
         if (n%i == 0) s += i + n/i;
     }
 
-    v_return(s);    //- ?
+    return  s;    //- ?
 }
 
 
@@ -31,7 +31,7 @@ is_amicable: (n: int, N: int) ~> bool
     if (m == n) v_return(false);
     if (m >= N) v_return(false);
 
-    v_return(n == sum_proper_divisors(m));
+    return  n == sum_proper_divisors(m);
 }
 
 

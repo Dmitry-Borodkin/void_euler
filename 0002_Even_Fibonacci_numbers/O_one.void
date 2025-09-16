@@ -20,7 +20,7 @@ mulSr5: (a: numSr5_t, b: numSr5_t) ~> numSr5_t
 
     r1 = a[0]*b[1] +   a[1]*b[0];
 
-    v_return({r0, r1});
+    return  {r0, r1};
 }
 
 alwaysinline
@@ -32,7 +32,7 @@ divSr5: (a: numSr5_t, b: numSr5_t) ~> numSr5_t
 
     num = num / den;        //- Sic!
 
-    v_return(num);
+    return  num;
 }
 
 
@@ -44,11 +44,11 @@ dpsiSr5: numSr5_t = {1,-1};
 
 
 //---------------------------------------------------------------------
-alwaysinline
+//alwaysinline
 powSr5: (a: numSr5_t, n: unsigned) ~> numSr5_t
 {
-    if (n == 0) v_return(oneSr5);
-    if (n == 1) v_return(a);
+    if (n == 0) return oneSr5;
+    if (n == 1) return a;
 
     ret: &numSr5_t := powSr5(a, n/2);
 
@@ -56,7 +56,7 @@ powSr5: (a: numSr5_t, n: unsigned) ~> numSr5_t
 
     if (n & 1)  ret := mulSr5(ret, a);
 
-    v_return(ret);
+    return  ret;
 }
 
 
@@ -70,7 +70,7 @@ powSr5: (a: numSr5_t, n: unsigned) ~> numSr5_t
 //
 //    ret = r[1] / ((1 : num_t) << n);
 //
-//    v_return(ret);
+//    return  ret;
 //}
 //
 //{   for (i: &unsigned := 0; ; ++i)
@@ -82,7 +82,7 @@ powSr5: (a: numSr5_t, n: unsigned) ~> numSr5_t
 //            printf("fib(%d): %llu\n", i, (F_i : long_long));
 //        }
 //
-//        if (F_i >= (4000000: num_t)*1000) v_break();
+//        if (F_i >= (4000000: num_t)*1000) break;
 //    }
 //}
 
@@ -95,9 +95,7 @@ sumGpSr5: (qn: numSr5_t, qd: num_t, n: unsigned) ~> numSr5_t
 
     den = qn - oneSr5*qd;
 
-    ret = divSr5(num, den);
-
-    v_return(ret);
+    return  divSr5(num, den);
 }
 
 //{   dphiSr5_3 = powSr5(dphiSr5, 3);
@@ -170,9 +168,7 @@ O_one: (N: num_t) ~> num_t
 
     r = Sdphi_P3 - Sdpsi_P3;
 
-    r = (r[1] : uint(128)) >> 3*P3;
-
-    v_return(r);
+    return  (r[1] : uint(128)) >> 3*P3;
 }
 
 

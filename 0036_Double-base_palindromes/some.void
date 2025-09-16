@@ -17,15 +17,15 @@ check_palindrome: (n: int, b: int) ~> bool
 
         nn /= b;
 
-        if (nn == 0)  v_break();
+        if (nn == 0)  break;
     }
 
     for (i: &int := 0; i < l; ++i, --l)
     {
-        if (d[i] != d[l])  v_return(false);
+        if (d[i] != d[l])  return false;
     }
 
-    v_return(true);
+    return  true;
 }
 
 
